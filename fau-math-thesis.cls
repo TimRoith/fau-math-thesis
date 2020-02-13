@@ -40,6 +40,14 @@ headsep=.8cm,footskip=1.2cm, showframe]{geometry}
 % ----------------------------------------------------------------------------------------
 \usepackage{xcolor}
 %
+\define@key{color}{titlecolor}{\def\titlecolor{#1}}
+\define@key{color}{titlebackground}{\def\titlebackground{#1}}
+\define@key{color}{background}{\def\background{#1}}
+\define@key{color}{titleboxcolor}{\def\titleboxcolor{#1}}
+\define@key{color}{boxcolor}{\def\boxcolor{#1}}
+\presetkeys{boxedtheorem}{titlecolor = black, titlebackground = white, background = white,%
+	titleboxcolor = black, boxcolor = black, thcounter=, size = .9\textwidth}{}
+%
 \def\colortheme#1{
 \def\@input{#1}
 \def\@thA{themeA}
@@ -54,6 +62,9 @@ headsep=.8cm,footskip=1.2cm, showframe]{geometry}
 	\definecolor{cC}{RGB}{100,40,40}
 \fi
 }
+
+
+
 
 % ########################################################################################
 %
