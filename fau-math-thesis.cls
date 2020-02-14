@@ -6,7 +6,6 @@
 \LoadClass[openright,12pt]{report}
 \usepackage{xkeyval}
 
-
 \newif\ifmc@nobind
 \mc@nobindfalse
 \newif\ifmc@showframe
@@ -207,4 +206,35 @@ url=false,%
 eprint=false,%
 backend=bibtex%
 ]{biblatex}
+% ########################################################################################\\
+%
+%
+%
+%
+%
 % ########################################################################################
+% Thorems, definitions, etc.
+% ----------------------------------------------------------------------------------------
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+
+\declaretheoremstyle[
+headfont=\bfseries, 
+notebraces={[}{]},
+bodyfont=\normalfont\itshape,
+headpunct={},
+postheadspace=\newline,
+postheadhook={\textcolor{red}{\rule[.6ex]{\linewidth}{0.4pt}}\\},
+spacebelow=\parsep,
+spaceabove=\parsep,
+mdframed={
+	backgroundcolor=red!20, 
+	linecolor=red!30, 
+	innertopmargin=6pt,
+	roundcorner=10pt, 
+	innerbottommargin=6pt, 
+	skipabove=\parsep, 
+	skipbelow=\parsep } 
+]{styleA}
+
