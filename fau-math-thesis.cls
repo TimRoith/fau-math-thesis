@@ -3,8 +3,10 @@
 % ########################################################################################
 % Why do we use report here? Are there bette oprions?
 % ----------------------------------------------------------------------------------------
-\LoadClass[openright,12pt]{report}
+\LoadClass[twoside, openright, 12pt]{report}
 \usepackage{xkeyval}
+
+ 
 
 \newif\ifmc@nobind
 \mc@nobindfalse
@@ -12,9 +14,19 @@
 \mc@showframefalse
 
 \DeclareOption{nobind}{\mc@nobindtrue}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \define@boolkey{fau-math-thesis.cls}[cls]{showframe}{}
+
+\newif\ifPHD@pageStyleI\PHD@pageStyleIfalse % Set Page StyleI
+\DeclareOption{PageStyleI}{\PHD@pageStyleItrue}
+
+\newif\ifPHD@pageStyleII\PHD@pageStyleIIfalse % Set Page StyleII
+\DeclareOption{PageStyleII}{\PHD@pageStyleIItrue}
+
+
 \ProcessOptions\relax
 \ProcessOptionsX
+
 
 
 
@@ -35,6 +47,73 @@ headsep=.8cm,footskip=1.2cm, showframe]{geometry}
 %
 %
 % ########################################################################################
+% Fancy Header
+% ----------------------------------------------------------------------------------------
+
+
+\RequirePackage{fancyhdr} % Define custom header
+
+% Style 1: Sets Page Number at the Top and Chapter/Section Name on LE/RO
+\fancypagestyle{PageStyleI}{
+	\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
+	\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1\ }}
+	\fancyhf{}
+	\fancyhead[RO]{\nouppercase \rightmark\hspace{0.25em} | 
+		\hspace{0.25em} \bfseries{\thepage}}
+	\fancyhead[LE]{ {\bfseries\thepage} \hspace{0.25em} | 
+		\hspace{0.25em} \nouppercase \leftmark}
+}
+
+% Style 2: Sets Page Number at the Bottom with Chapter/Section Name on LO/RE
+\fancypagestyle{PageStyleII}{
+	\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
+	\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
+	\fancyhf{}
+	\fancyhead[RO]{\bfseries\nouppercase \rightmark}
+	\fancyhead[LE]{\bfseries \nouppercase \leftmark}
+	\fancyfoot[C]{\thepage}
+}
+
+
+% Set Fancy Header Command is defined to Load FancyHdr after Geometry is defined
+\newcommand{\setFancyHdr}{
+	
+	\pagestyle{fancy}
+	
+	\ifPHD@pageStyleI
+	% Style 1: Sets Page Number at the Top and Chapter/Section Name on LE/RO
+	\pagestyle{PageStyleI}
+	
+	\else
+	\ifPHD@pageStyleII
+	
+	% Style 2: Sets Page Number at the Bottom with Chapter/Section Name on LO/RE
+	\pagestyle{PageStyleII}
+	
+	\else
+	% Default Style: Sets Page Number at the Top (LE/RO) with Chapter/Section Name
+	% on LO/RE and an empty footer
+	\renewcommand{\chaptermark}[1]{\markboth {##1}{}}
+	\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
+	\fancyhf{}
+	\fancyhead[LO]{\nouppercase \rightmark}
+	\fancyhead[LE,RO]{\bfseries\thepage}
+	\fancyhead[RE]{\nouppercase \leftmark}
+	\fi
+	\fi
+}
+
+\setlength{\headheight}{14.5pt}
+%\renewcommand{\headrulewidth}{0.5pt}
+%\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{
+	\fancyhead{}
+	\renewcommand{\headrulewidth}{0pt}
+}
+
+
+
+% ########################################################################################
 % Colors
 % ----------------------------------------------------------------------------------------
 \usepackage{xcolor}
@@ -44,46 +123,87 @@ headsep=.8cm,footskip=1.2cm, showframe]{geometry}
 \define@key{color}{background}{\def\background{#1}}
 \define@key{color}{titleboxcolor}{\def\titleboxcolor{#1}}
 \define@key{color}{boxcolor}{\def\boxcolor{#1}}
-\presetkeys{boxedtheorem}{titlecolor = black, titlebackground = white, background = white,%
-	titleboxcolor = black, boxcolor = black, thcounter=, size = .9\textwidth}{}
+\setkeys{color}{titlecolor = black, titlebackground = white, background = white,%
+				titleboxcolor = black, boxcolor = black}{}
 %
-\def\colortheme#1{
-\def\@input{#1}
-\def\@thA{themeA}
-%
-\ifx \@input\@thA
-	\definecolor{cA}{RGB}{40,100,40}
-	\definecolor{cB}{RGB}{0,40,140}
-	\definecolor{cC}{RGB}{100,40,40}
-\else % default values
-	\definecolor{cA}{RGB}{40,100,40}
-	\definecolor{cB}{RGB}{0,40,140}
-	\definecolor{cC}{RGB}{100,40,40}
-\fi
+\def\colors#1{
+\setkeys{color}{#1}	
+\hypersetup{colorlinks = true,
+		urlcolor=\titlecolor,
+		citecolor=\titleboxcolor
+		linkcolor=\titlebackground}
+}
+\def\colorthemefaumath{
+	\definecolor{cA}{RGB}{0,155,119}
+	\definecolor{cB}{RGB}{170,207,189}
+	\definecolor{cC}{RGB}{229,239,234}
+	\colors{titlecolor=cA, titlebackground = cB, background = cC}
 }
 
 
 
+%\def\colortheme#1{
+%\def\@input{#1}
+%\def\@thA{themeA}
+%%
+%\ifx \@input\@thA
+%	\definecolor{cA}{RGB}{40,100,40}
+%	\definecolor{cB}{RGB}{0,40,140}
+%	\definecolor{cC}{RGB}{100,40,40}
+%\else % default values
+%	\definecolor{cA}{RGB}{40,100,40}
+%	\definecolor{cB}{RGB}{0,40,140}
+%	\definecolor{cC}{RGB}{100,40,40}
+%\fi
+%}
 
 % ########################################################################################
-%
-%
-%
-%
-%
-% ########################################################################################
-% Hyperef stuff
+% Chapter opening
+% ------------------
+% The following code is inspired by the qoutechap package.
 % ----------------------------------------------------------------------------------------
-\usepackage[colorlinks = true, linkcolor = cA, citecolor = cB, urlcolor = cA]{hyperref}
-\def\setpdfinfo{\hypersetup{pdfinfo={
-		Title={\@title},
-		Author={\@author},
-		Subject={\@thesistype},
-		Keywords={\@keywords}}}}
+\providecommand*{\chapterheadstartvskip}{\vspace*{2.3\baselineskip}}
+\providecommand*{\chapterheadendvskip}{\vspace{1.7\baselineskip}}
+\@ifundefined{@mainmattertrue}{\newif\if@mainmatter\@mainmattertrue}{}
+%
+\renewcommand\chapter{%
+	\if@openright\cleardoublepage\else\clearpage\fi
+	\thispagestyle{plain}%
+	\global\@topnum\z@
+	\@afterindentfalse
+	\secdef\@chapter\@schapter}
+%
+\newcommand*{\chapnumfont}{%
+	\usefont{T1}{ptm}{b}{n}\fontsize{100}{130}\selectfont%
+	\color{\titlecolor}
+}
+\let\size@chapter\huge
+
+\renewcommand{\@makechapterhead}[1]{\chapterheadstartvskip%
+	{\size@chapter
+		{\relax\raggedleft
+			{\chapnumfont
+				\ifnum \c@secnumdepth >\m@ne%
+				\if@mainmatter\thechapter%
+				\fi\fi
+				\par\nobreak
+			}%
+			{\raggedleft\advance\leftmargin10em\interlinepenalty\@M #1\par}
+		}
+		\nobreak\chapterheadendvskip
+	}
+}
+
+\renewcommand{\@makeschapterhead}[1]{%
+	{\let\c@secnumdepth\m@ne\@makechapterhead{#1}}}
 % ########################################################################################
 
-
-
+% ########################################################################################
+%
+%
+%
+%
+%
 \usepackage{tabularx}
 \usepackage{graphicx}
 
@@ -185,6 +305,25 @@ von \textbf{\@author}
 %
 %
 %
+
+
+
+\usepackage[nohints,tight]{minitoc} 
+\setcounter{minitocdepth}{2} 
+% The level that gets a number:
+\setcounter{secnumdepth}{2}
+% The level that shows up in the ToC:
+\setcounter{tocdepth}{2}
+
+
+%\renewcommand{\chapterheadstartvskip}{\vspace*{40pt}}
+%\renewcommand{\chapterheadendvskip}{\vspace{30pt}}
+
+
+
+
+
+
 % ########################################################################################
 % Bibliography
 % ----------------------------------------------------------------------------------------
@@ -218,23 +357,37 @@ backend=bibtex%
 \usepackage{amsthm}
 \usepackage{thmtools}
 \usepackage[framemethod=TikZ]{mdframed}
-
+% some styles
 \declaretheoremstyle[
 headfont=\bfseries, 
 notebraces={[}{]},
 bodyfont=\normalfont\itshape,
 headpunct={},
 postheadspace=\newline,
-postheadhook={\textcolor{red}{\rule[.6ex]{\linewidth}{0.4pt}}\\},
+postheadhook={\textcolor{\titlecolor}{\rule[.6ex]{\linewidth}{0.4pt}}\\},
 spacebelow=\parsep,
 spaceabove=\parsep,
 mdframed={
-	backgroundcolor=red!20, 
-	linecolor=red!30, 
+	backgroundcolor=\background, 
+	linecolor=\titlebackground, 
 	innertopmargin=6pt,
 	roundcorner=10pt, 
 	innerbottommargin=6pt, 
 	skipabove=\parsep, 
 	skipbelow=\parsep } 
 ]{styleA}
-
+%
+%
+%
+%
+%
+% ########################################################################################
+% Hyperref stuff
+% ----------------------------------------------------------------------------------------
+\usepackage{hyperref}
+\def\setpdfinfo{\hypersetup{pdfinfo={
+			Title={\@title},
+			Author={\@author},
+			Subject={\@thesistype},
+			Keywords={\@keywords}}}}
+% ########################################################################################
