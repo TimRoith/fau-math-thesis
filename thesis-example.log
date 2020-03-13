@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2020.1.27)  12 MAR 2020 14:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2020.1.27)  13 MAR 2020 16:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1438,31 +1438,43 @@ Package mdframed Info: mdframed detected package amsthm
  changed the theorem header of amsthm
 (mdframed)              on input line 17.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 20.
+(babel)             in language  on input line 19.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 20.
+(babel)             in language  on input line 19.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 20.
+(babel)             in language  on input line 19.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 19.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 19.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 22.
-Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 22.
-Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 22.
-Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 19.
  [3]
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 21.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 21.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 22.
-)
+(babel)             in language  on input line 21.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 23.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 23.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 23.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 24.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 24.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 24.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 24.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 24.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 24.
+ [4])
 (./chapters/01_chapter_one.tex
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 2.
@@ -1476,7 +1488,22 @@ Package babel Info: Redefining german shorthand "|
 (babel)             in language  on input line 2.
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 2.
- [4]
+ [5]
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 2.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 2.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 2.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 2.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 2.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 2.
+ [6
+
+]
 Kapitel 2.
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 2.
@@ -1507,33 +1534,43 @@ Package mdframed Info: mdframed detected package amsthm
  changed the theorem header of amsthm
 (mdframed)              on input line 17.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 20.
+(babel)             in language  on input line 19.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 20.
+(babel)             in language  on input line 19.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 20.
+(babel)             in language  on input line 19.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 19.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 19.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 19.
+[7]
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 21.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 21.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 22.
-[5
-
-]
+(babel)             in language  on input line 21.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 23.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 22.
+(babel)             in language  on input line 23.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 22.
-)
+(babel)             in language  on input line 23.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 24.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 24.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 24.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 24.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 24.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 24.
+ [8])
 Package minitoc Info: I0009
 (minitoc)             Listing minitoc auxiliary files. 
 (minitoc)             Creating the thesis-example.maf file.
@@ -1551,7 +1588,7 @@ Package babel Info: Redefining german shorthand "|
 (babel)             in language  on input line 32.
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 32.
- [6]
+ [9]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 32.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 32.
  (./thesis-example.aux)
@@ -1569,13 +1606,13 @@ Package logreq Info: Writing requests to 'thesis-example.run.xml'.
  )
 (\end occurred when \iftrue on line 24 was incomplete) 
 Here is how much of TeX's memory you used:
- 32020 strings out of 494837
- 595966 string characters out of 6176554
+ 32023 strings out of 494837
+ 595984 string characters out of 6176554
  925397 words of memory out of 5000000
  34606 multiletter control sequences out of 15000+600000
  14541 words of font info for 38 fonts, out of 8000000 for 9000
  38 hyphenation exceptions out of 8191
- 79i,11n,82p,10453b,1544s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 79i,11n,82p,10453b,1548s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf
 -dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
@@ -1585,10 +1622,10 @@ s12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
-Output written on thesis-example.pdf (6 pages, 106296 bytes).
+Output written on thesis-example.pdf (9 pages, 109619 bytes).
 PDF statistics:
- 134 PDF objects out of 1000 (max. 8388607)
- 113 compressed objects within 2 object streams
- 31 named destinations out of 1000 (max. 500000)
+ 148 PDF objects out of 1000 (max. 8388607)
+ 124 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
  87 words of extra memory for PDF output out of 10000 (max. 10000000)
 
