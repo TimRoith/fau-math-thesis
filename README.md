@@ -14,6 +14,8 @@ Also a lot.
 --------------------------------------
 # How to use
 Find it out, lol!
+# License
+This all belongs to ME!
 
 --------------------------------------
 # ToDo
