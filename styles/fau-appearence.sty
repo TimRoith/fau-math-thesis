@@ -1,0 +1,115 @@
+\ProvidesPackage{styles/fau-colors}[Appearance
+									Author: Tim Carsten Otto Roith]
+
+
+% Style 1: Sets Page Number at the Top and Chapter/Section Name on LE/RO
+\fancypagestyle{PageStyleI}{
+	\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
+	\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1\ }}
+	\fancyhf{}
+	\fancyhead[RO]{\nouppercase \rightmark\hspace{0.25em} | 
+		\hspace{0.25em} \bfseries{\thepage}}
+	\fancyhead[LE]{ {\bfseries\thepage} \hspace{0.25em} | 
+		\hspace{0.25em} \nouppercase \leftmark}
+}
+
+% Style 2: Sets Page Number at the Bottom with Chapter/Section Name on LO/RE
+\fancypagestyle{PageStyleII}{
+	\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
+	\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
+	\fancyhf{}
+	\fancyhead[RO]{\bfseries\nouppercase \rightmark}
+	\fancyhead[LE]{\bfseries \nouppercase \leftmark}
+	\fancyfoot[C]{\thepage}
+}
+
+% ########################################################################################
+% Chapter opening
+% ----------------------------------------------------------------------------------------
+% The following code is inspired by the qoutechap package.
+% ----------------------------------------------------------------------------------------
+\let\size@chapter\huge
+
+\renewcommand{\@makechapterhead}[1]{\chapterheadstartvskip%
+	{\size@chapter
+		{\relax\raggedleft
+			{	\usefont{T1}{ptm}{b}{n}\fontsize{100}{130}\selectfont%
+				\color{\titlecolor}
+				\ifnum \c@secnumdepth >\m@ne%
+				\if@mainmatter\thechapter%
+				\fi\fi
+				\par\nobreak
+			}%
+			{\raggedleft\advance\leftmargin10em\interlinepenalty\@M #1\par}
+		}
+		\nobreak\chapterheadendvskip
+	}
+}
+
+\renewcommand{\@makeschapterhead}[1]{%
+	{\let\c@secnumdepth\m@ne\@makechapterhead{#1}}}
+	
+	
+% ########################################################################################
+% Theorem and box appearence
+% ----------------------------------------------------------------------------------------
+\usepackage[most]{tcolorbox}
+% default definition and theorem style
+\tcbset{
+	thmstyle_plain/.style={fonttitle=\bfseries\upshape, fontupper=\slshape,
+	colback=white,colframe=white, % no visible frame, no visible background
+	coltitle=black, % Titlecolor
+	separator sign none, % Theorem 1.2 >separator sign< (Euler).
+	description delimiters parenthesis, % Theorem 1.2 >(<Euler>)<.
+	terminator sign={.}, % Theorem 1.2 (Euler)>.<
+	attach title to upper={~  }, % Theorem 1.2 (Euler). Text will start in this line.
+	size = fbox % spacing of the box around the theorem
+}}
+% This style is inspired by an answer given on stackexchange: 
+%https://tex.stackexchange.com/questions/369430/theorems-and-definitions-boxes-numbering-should-be-chapter-wise
+% ----------------------------------------------------------------------------------------	
+\tcbset{thmstyle_A/.style={
+    enhanced,
+    sharp corners,
+    attach boxed title to top left={
+      yshift=-4mm,
+      yshifttext=-1mm
+    },
+    coltitle=white,
+    top=1.5ex,
+    colback=white,
+    colframe=\titlecolor,
+    fonttitle=\bfseries,
+    boxed title style={
+    sharp corners,
+    size=small,
+    colback=\titlecolor,
+    colframe=\titlebackground,
+  },
+  terminator sign={.}
+}}
+% ----------------------------------------------------------------------------------------
+% Kinda FAU corporate
+% ----------------------------------------------------------------------------------------
+\tcbset{thmstyle_B/.style={
+    enhanced,
+    sharp corners,
+    attach boxed title to top left={
+      xshift=0mm,
+      yshift=1mm
+    },
+    coltitle=white,
+    top=1.5ex,
+    colback=white,
+    colframe=white,
+    fonttitle=\bfseries,
+    boxed title style={
+    sharp corners,
+    size=fbox,
+    colback=\titlecolor,
+    colframe=white,
+    borderline west={2mm}{-2mm}{\titlecolor}
+  },
+  borderline west ={2mm}{-2mm}{\titlecolor},
+  terminator sign={.}
+}}

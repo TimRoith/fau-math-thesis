@@ -1,4 +1,4 @@
-\documentclass[showframe=true, PageStyleII]{fau-math-thesis}
+\documentclass[showframe, oneside]{fau-math-thesis}
 %
 % ########################################################################################
 % The following specifies the titlepage and can not be deleted
@@ -12,15 +12,22 @@
 % ########################################################################################
 \keywords{topicA, topicB, topicC} %keywords of your thesis
 \setpdfinfo % For additional information in the pdf file
-%\pagestyle{}
-\setFancyHdr
 % ########################################################################################
 % bibliography
 % \addbibresource{BA_Bibliography.bib}
-\declaretheorem[style=styleA, name = Theorem, numberwithin=chapter]{theorem}
-\declaretheorem[style=styleA, name = Lemma, numberwithin=chapter]{lemma}
-\declaretheorem[style=styleA, name = Definiton, numberwithin=chapter]{definition}
+%
+\usepackage{tabularx}
+\usepackage{graphicx}
+%
+\usepackage{styles/fau-colors}
 \colorthemefaumath
+%
+\usepackage{styles/fau-appearence}
+% ########################################################################################
+\newtcbtheorem[number within=chapter]{theorem}{THEOREM}{thmstyle_B}{thm}
+\newtcbtheorem[use counter from=theorem]{definition}{DEFINITION}{thmstyle_plain}{def}
+\newtcbtheorem[use counter from=theorem]{corollary}{COROLLARY}{thmstyle_plain}{cor}
+
 \begin{document}
 %\dominitoc
 

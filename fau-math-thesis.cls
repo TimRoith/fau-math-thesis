@@ -1,44 +1,62 @@
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{fau-math-thesis}[2020/02/11 FAU math]
 % ########################################################################################
-% Why do we use report here? Are there bette oprions?
+% Class specification
 % ----------------------------------------------------------------------------------------
-\LoadClass[twoside, openright, 12pt]{report}
-\usepackage{xkeyval}
+\def\classname{fau-math-theis}
+\def\fileversion{0.1}
+\def\filedate{18/03/2020}
+\def\baseclass{scrbook}
 
- 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{fau-math-thesis}[\filedate A class file for a FAU math thesis]
+% ########################################################################################
+% Options and bools
+% ----------------------------------------------------------------------------------------
+% Here we declare the options passed to the classed and define bools which are mostly 
+% used further below
+% ----------------------------------------------------------------------------------------
+\usepackage{xkeyval} % Should be loaded here in case we want to define xkey Options
+% ------------------------------------------------
+% Bibliography, the options are currently very limited, user can either specify the 
+% the bib stuff himself by using ths option or use the spec from the bib section 
+% down below
+% ------------------------------------------------
+\newif\ifTH@customBib\TH@customBibfalse
+\DeclareOption{customBib}{\TH@customBibtrue}
+% ------------------------------------------------
+%
+%
+\newif\ifTH@PDF\TH@PDFfalse % PDF Option, if false it is a document for actual printing
+\DeclareOption{PDF}{\TH@PDFtrue}
+%
+%
+\DeclareOption{showframe}{\PassOptionsToPackage{showframe}{geometry}}
+%
+%
+\newif\if@oneside\@onesidefalse
+\DeclareOption{oneside}{\PassOptionsToClass{\CurrentOption}{\baseclass}\@onesidetrue}%
+\DeclareOption{twoside}{\PassOptionsToClass{\CurrentOption}{\baseclass}}%
 
-\newif\ifmc@nobind
-\mc@nobindfalse
-\newif\ifmc@showframe
-\mc@showframefalse
 
-\DeclareOption{nobind}{\mc@nobindtrue}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
-\define@boolkey{fau-math-thesis.cls}[cls]{showframe}{}
 
-\newif\ifPHD@pageStyleI\PHD@pageStyleIfalse % Set Page StyleI
-\DeclareOption{PageStyleI}{\PHD@pageStyleItrue}
-
-\newif\ifPHD@pageStyleII\PHD@pageStyleIIfalse % Set Page StyleII
-\DeclareOption{PageStyleII}{\PHD@pageStyleIItrue}
-
+\DeclareOption*{
+  \PassOptionsToClass{\CurrentOption}{\baseclass}
+}
 
 \ProcessOptions\relax
 \ProcessOptionsX
 
-
+\LoadClass[twoside, openright, 12pt]{\baseclass}
 
 
 % ########################################################################################
 % Defines the page layout
 % ----------------------------------------------------------------------------------------
-\ifmc@nobind
+\ifTH@PDF
 \usepackage[includehead,hmargin={3.1cm, 3.1cm}, vmargin={2.5cm,2.7cm}, 
-headsep=.8cm,footskip=1.2cm, showframe]{geometry}
+headsep=.8cm,footskip=1.2cm]{geometry}
 \else
-\usepackage[includehead,hmargin={3.6cm, 2.6cm}, vmargin={2.5cm,2.7cm}, 
-headsep=.8cm,footskip=1.2cm, showframe]{geometry}
+\usepackage[paper=a4paper, includehead,hmargin={3.6cm, 2.6cm}, vmargin={2.5cm,2.7cm}, 
+headsep=.8cm,footskip=1.2cm]{geometry}
 \fi
 % ########################################################################################
 %
@@ -49,72 +67,35 @@ headsep=.8cm,footskip=1.2cm, showframe]{geometry}
 % ########################################################################################
 % Fancy Header
 % ----------------------------------------------------------------------------------------
-
-
-\RequirePackage{fancyhdr} % Define custom header
-
-% Style 1: Sets Page Number at the Top and Chapter/Section Name on LE/RO
-\fancypagestyle{PageStyleI}{
-	\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
-	\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1\ }}
-	\fancyhf{}
-	\fancyhead[RO]{\nouppercase \rightmark\hspace{0.25em} | 
-		\hspace{0.25em} \bfseries{\thepage}}
-	\fancyhead[LE]{ {\bfseries\thepage} \hspace{0.25em} | 
-		\hspace{0.25em} \nouppercase \leftmark}
-}
-
-% Style 2: Sets Page Number at the Bottom with Chapter/Section Name on LO/RE
-\fancypagestyle{PageStyleII}{
-	\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
-	\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
-	\fancyhf{}
-	\fancyhead[RO]{\bfseries\nouppercase \rightmark}
-	\fancyhead[LE]{\bfseries \nouppercase \leftmark}
-	\fancyfoot[C]{\thepage}
-}
-
-
-% Set Fancy Header Command is defined to Load FancyHdr after Geometry is defined
-\newcommand{\setFancyHdr}{
-	
-	\pagestyle{fancy}
-	
-	\ifPHD@pageStyleI
-	% Style 1: Sets Page Number at the Top and Chapter/Section Name on LE/RO
-	\pagestyle{PageStyleI}
-	
-	\else
-	\ifPHD@pageStyleII
-	
-	% Style 2: Sets Page Number at the Bottom with Chapter/Section Name on LO/RE
-	\pagestyle{PageStyleII}
-	
-	\else
-	% Default Style: Sets Page Number at the Top (LE/RO) with Chapter/Section Name
-	% on LO/RE and an empty footer
-	\renewcommand{\chaptermark}[1]{\markboth {##1}{}}
-	\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
-	\fancyhf{}
-	\fancyhead[LO]{\nouppercase \rightmark}
-	\fancyhead[LE,RO]{\bfseries\thepage}
-	\fancyhead[RE]{\nouppercase \leftmark}
-	\fi
-	\fi
-}
-
+% The fancyhdr package is loaded and the deafault page style is set. Additonal page styles 
+% are defined in the file fau-appearence.sty.
+% ----------------------------------------------------------------------------------------
+\RequirePackage{fancyhdr}
+\renewcommand{\chaptermark}[1]{\markboth {#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LO]{\nouppercase \rightmark}
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[RE]{\nouppercase \leftmark}
 \setlength{\headheight}{14.5pt}
-%\renewcommand{\headrulewidth}{0.5pt}
-%\renewcommand{\footrulewidth}{0pt}
+%
 \fancypagestyle{plain}{
 	\fancyhead{}
 	\renewcommand{\headrulewidth}{0pt}
 }
-
-
-
+% ########################################################################################
+%
+%
+%
+%
+%
 % ########################################################################################
 % Colors
+% ----------------------------------------------------------------------------------------
+% Here we define the basic structure for using consistent colors in our document. The idea 
+% is to define key values with respective commands, i.e. \titlecolor that can be used 
+% througout the document. The command \colors will set the colors, it is used in the file
+% fau-colors.sty where additional colors are defined.
 % ----------------------------------------------------------------------------------------
 \usepackage{xcolor}
 %
@@ -126,6 +107,7 @@ headsep=.8cm,footskip=1.2cm, showframe]{geometry}
 \setkeys{color}{titlecolor = black, titlebackground = white, background = white,%
 				titleboxcolor = black, boxcolor = black}{}
 %
+%
 \def\colors#1{
 \setkeys{color}{#1}	
 \hypersetup{colorlinks = true,
@@ -133,85 +115,24 @@ headsep=.8cm,footskip=1.2cm, showframe]{geometry}
 		citecolor=\titleboxcolor
 		linkcolor=\titlebackground}
 }
-\def\colorthemefaumath{
-	\definecolor{cA}{RGB}{0,155,119}
-	\definecolor{cB}{RGB}{170,207,189}
-	\definecolor{cC}{RGB}{229,239,234}
-	\colors{titlecolor=cA, titlebackground = cB, background = cC}
-}
-
-
-
-%\def\colortheme#1{
-%\def\@input{#1}
-%\def\@thA{themeA}
-%%
-%\ifx \@input\@thA
-%	\definecolor{cA}{RGB}{40,100,40}
-%	\definecolor{cB}{RGB}{0,40,140}
-%	\definecolor{cC}{RGB}{100,40,40}
-%\else % default values
-%	\definecolor{cA}{RGB}{40,100,40}
-%	\definecolor{cB}{RGB}{0,40,140}
-%	\definecolor{cC}{RGB}{100,40,40}
-%\fi
-%}
-
 % ########################################################################################
-% Chapter opening
-% ------------------
-% The following code is inspired by the qoutechap package.
+%
+%
+%
+%
+%
+% ########################################################################################
+% Datetime commands
 % ----------------------------------------------------------------------------------------
-\providecommand*{\chapterheadstartvskip}{\vspace*{2.3\baselineskip}}
-\providecommand*{\chapterheadendvskip}{\vspace{1.7\baselineskip}}
-\@ifundefined{@mainmattertrue}{\newif\if@mainmatter\@mainmattertrue}{}
-%
-\renewcommand\chapter{%
-	\if@openright\cleardoublepage\else\clearpage\fi
-	\thispagestyle{plain}%
-	\global\@topnum\z@
-	\@afterindentfalse
-	\secdef\@chapter\@schapter}
-%
-\newcommand*{\chapnumfont}{%
-	\usefont{T1}{ptm}{b}{n}\fontsize{100}{130}\selectfont%
-	\color{\titlecolor}
-}
-\let\size@chapter\huge
-
-\renewcommand{\@makechapterhead}[1]{\chapterheadstartvskip%
-	{\size@chapter
-		{\relax\raggedleft
-			{\chapnumfont
-				\ifnum \c@secnumdepth >\m@ne%
-				\if@mainmatter\thechapter%
-				\fi\fi
-				\par\nobreak
-			}%
-			{\raggedleft\advance\leftmargin10em\interlinepenalty\@M #1\par}
-		}
-		\nobreak\chapterheadendvskip
-	}
-}
-
-\renewcommand{\@makeschapterhead}[1]{%
-	{\let\c@secnumdepth\m@ne\@makechapterhead{#1}}}
-% ########################################################################################
-
-% ########################################################################################
-%
-%
-%
-%
-%
-\usepackage{tabularx}
-\usepackage{graphicx}
-
-
 \usepackage[american, german]{babel}
 \usepackage[ngerman]{datetime}
 \newdateformat{gerformat}{\THEDAY{.}\hspace{3pt}\monthname[\THEMONTH] \THEYEAR}
-
+% ########################################################################################
+%
+%
+%
+%
+%
 % ########################################################################################
 % Some usful stuff we'll need all the time
 % ----------------------------------------------------------------------------------------
@@ -305,46 +226,49 @@ von \textbf{\@author}
 %
 %
 %
-
-
-
-\usepackage[nohints,tight]{minitoc} 
-\setcounter{minitocdepth}{2} 
-% The level that gets a number:
-\setcounter{secnumdepth}{2}
-% The level that shows up in the ToC:
-\setcounter{tocdepth}{2}
+% ########################################################################################
+% Probably minitocs are cool, we'll see
+% ----------------------------------------------------------------------------------------
+%\usepackage[nohints,tight]{minitoc} 
+%\setcounter{minitocdepth}{2} 
+%% The level that gets a number:
+%\setcounter{secnumdepth}{2}
+%% The level that shows up in the ToC:
+%\setcounter{tocdepth}{2}
 
 
 %\renewcommand{\chapterheadstartvskip}{\vspace*{40pt}}
 %\renewcommand{\chapterheadendvskip}{\vspace{30pt}}
-
-
-
-
-
-
+% ########################################################################################
+%
+%
+%
+%
+%
 % ########################################################################################
 % Bibliography
 % ----------------------------------------------------------------------------------------
+\ifTH@customBib %
+\else
 \usepackage{csquotes}
 \usepackage[style=numeric-comp,%
-defernumbers=true,
-useprefix=true,%
-giveninits=true,%
-hyperref=true,%
-autocite=inline,
-maxcitenames=2,%
-maxbibnames=20,%
-uniquename=init,%
-sorting = none,
-sortcites=false,% sort citations when multiple entries are passed to one cite command
-doi=true,%
-isbn=false,%
-url=false,%
-eprint=false,%
-backend=bibtex%
+			defernumbers=true,
+			useprefix=true,%
+			giveninits=true,%
+			hyperref=true,%
+			autocite=inline,
+			maxcitenames=2,%
+			maxbibnames=20,%
+			uniquename=init,%
+			sorting = none,
+			sortcites=false,% sort citations when multiple entries are passed to one cite command
+			doi=true,%
+			isbn=false,%
+			url=false,%
+			eprint=false,%
+			backend=bibtex%
 ]{biblatex}
+\fi
 % ########################################################################################\\
 %
 %
@@ -354,28 +278,8 @@ backend=bibtex%
 % ########################################################################################
 % Thorems, definitions, etc.
 % ----------------------------------------------------------------------------------------
-\usepackage{amsthm}
-\usepackage{thmtools}
-\usepackage[framemethod=TikZ]{mdframed}
-% some styles
-\declaretheoremstyle[
-headfont=\bfseries, 
-notebraces={[}{]},
-bodyfont=\normalfont\itshape,
-headpunct={},
-postheadspace=\newline,
-postheadhook={\textcolor{\titlecolor}{\rule[.6ex]{\linewidth}{0.4pt}}\\},
-spacebelow=\parsep,
-spaceabove=\parsep,
-mdframed={
-	backgroundcolor=\background, 
-	linecolor=\titlebackground, 
-	innertopmargin=6pt,
-	roundcorner=10pt, 
-	innerbottommargin=6pt, 
-	skipabove=\parsep, 
-	skipbelow=\parsep } 
-]{styleA}
+\usepackage{amsmath, amssymb, amsthm}
+% ########################################################################################
 %
 %
 %
@@ -385,9 +289,23 @@ mdframed={
 % Hyperref stuff
 % ----------------------------------------------------------------------------------------
 \usepackage{hyperref}
+\hypersetup{
+    final=true,
+    plainpages=false,
+    pdfstartview=FitV,
+    pdftoolbar=true,
+    pdfmenubar=true,
+    bookmarksopen=true,
+    bookmarksnumbered=true,
+    breaklinks=true,
+    linktocpage,
+}
 \def\setpdfinfo{\hypersetup{pdfinfo={
 			Title={\@title},
 			Author={\@author},
 			Subject={\@thesistype},
 			Keywords={\@keywords}}}}
 % ########################################################################################
+% Misc
+% ----------------------------------------------------------------------------------------
+\usepackage{todonotes}
