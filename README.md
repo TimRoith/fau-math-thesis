@@ -12,9 +12,9 @@ A lot.
 Also a lot.
 
 --------------------------------------
-# How to use
+## How to use
 Find it out, lol!
-# License
+## License
 This all belongs to ME!
 
 --------------------------------------
