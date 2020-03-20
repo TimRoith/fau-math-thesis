@@ -1,0 +1,8 @@
+# I really dont want none of theses files in here
+*.aux
+*.dep
+*.log
+*.out
+*.synctex.gz
+*.log
+*.fls
