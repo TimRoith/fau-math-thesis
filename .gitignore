@@ -6,3 +6,9 @@
 *.synctex.gz
 *.log
 *.fls
+*.dvi
+*.maf
+*.mtc
+*.mtcO
+*.run.xml
+*-blx.bib
