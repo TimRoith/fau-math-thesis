@@ -6,7 +6,9 @@ A LaTex template for math students of FAU.
 A lot.
 # What does it not do?
 Also a lot.
+
 --------------------------------------
 # How to use
 Find it out lol!
+
 --------------------------------------
