@@ -9,6 +9,6 @@
 *.dvi
 *.maf
 *.mtc
-*.mtcO
+*.mtc0
 *.run.xml
 *-blx.bib
