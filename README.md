@@ -13,6 +13,8 @@ Also a lot.
 
 --------------------------------------
 # How to use
-Find it out lol!
+Find it out, lol!
 
 --------------------------------------
+# ToDo
+At this point even the ToDo is a ToDo.
