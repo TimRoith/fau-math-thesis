@@ -12,9 +12,12 @@ A lot.
 Also a lot.
 
 --------------------------------------
-## How to use
+# How to use
 Find it out, lol!
-## License
+## Git Workflow
+Mess around with forks, this helps!
+
+# License
 This all belongs to ME!
 
 --------------------------------------
