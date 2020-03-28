@@ -3,9 +3,7 @@ FAU math thesis
 # Description
 A LaTex template for math students of FAU.
 # Authors
-* Benno B.
-* Erwin Dantes
-* Tim C.O. Roith
+* Tim Roith
 # What does it do?
 A lot.
 # What does it not do?
