@@ -45,7 +45,7 @@
 \ProcessOptions\relax
 \ProcessOptionsX
 
-\LoadClass[twoside, openright, 12pt]{\baseclass}
+\LoadClass[openright, 12pt]{\baseclass}
 
 
 % ########################################################################################
@@ -53,9 +53,9 @@
 % ----------------------------------------------------------------------------------------
 \ifTH@PDF
 \usepackage[includehead,hmargin={3.1cm, 3.1cm}, vmargin={2.5cm,2.7cm}, 
-headsep=.8cm,footskip=1.2cm]{geometry}
+headsep=.8cm,footskip=1.2cm, marginparsep=0.4cm, marginparwidth=2.7cm]{geometry}
 \else
-\usepackage[paper=a4paper, includehead,hmargin={3.6cm, 2.6cm}, vmargin={2.5cm,2.7cm}, 
+\usepackage[includehead,hmargin={3.6cm, 2.6cm}, vmargin={2.5cm,2.7cm}, 
 headsep=.8cm,footskip=1.2cm]{geometry}
 \fi
 % ########################################################################################
@@ -110,10 +110,10 @@ headsep=.8cm,footskip=1.2cm]{geometry}
 %
 \def\colors#1{
 \setkeys{color}{#1}	
-\hypersetup{colorlinks = true,
+\hypersetup{
 		urlcolor=\titlecolor,
-		citecolor=\titleboxcolor
-		linkcolor=\titlebackground}
+		citecolor=\titleboxcolor,
+		linkcolor=\titlecolor}
 }
 % ########################################################################################
 %
@@ -290,6 +290,7 @@ von \textbf{\@author}
 % ----------------------------------------------------------------------------------------
 \usepackage{hyperref}
 \hypersetup{
+	colorlinks = true,
     final=true,
     plainpages=false,
     pdfstartview=FitV,
@@ -298,7 +299,7 @@ von \textbf{\@author}
     bookmarksopen=true,
     bookmarksnumbered=true,
     breaklinks=true,
-    linktocpage,
+    linktocpage
 }
 \def\setpdfinfo{\hypersetup{pdfinfo={
 			Title={\@title},

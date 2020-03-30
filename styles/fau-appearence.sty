@@ -57,13 +57,15 @@
 % default definition and theorem style
 \tcbset{
 	thmstyle_plain/.style={fonttitle=\bfseries\upshape, fontupper=\slshape,
-	colback=white,colframe=white, % no visible frame, no visible background
+	before skip=15pt, % space before env
+	colback=white, boxrule=0pt, colframe=white, % no visible frame, no visible background
 	coltitle=black, % Titlecolor
 	separator sign none, % Theorem 1.2 >separator sign< (Euler).
 	description delimiters parenthesis, % Theorem 1.2 >(<Euler>)<.
 	terminator sign={.}, % Theorem 1.2 (Euler)>.<
 	attach title to upper={~  }, % Theorem 1.2 (Euler). Text will start in this line.
-	size = fbox % spacing of the box around the theorem
+	size = minimal, % spacing of the box around the theorem
+	boxsep=0mm
 }}
 % This style is inspired by an answer given on stackexchange: 
 %https://tex.stackexchange.com/questions/369430/theorems-and-definitions-boxes-numbering-should-be-chapter-wise
@@ -92,24 +94,30 @@
 % Kinda FAU corporate
 % ----------------------------------------------------------------------------------------
 \tcbset{thmstyle_B/.style={
+    boxrule=0pt,
+    before skip=15pt,
     enhanced,
     sharp corners,
     attach boxed title to top left={
-      xshift=0mm,
-      yshift=1mm
+      	xshift=0mm,
+      	yshift=1mm
     },
+    %minipage boxed title = \linewidth,
     coltitle=white,
     top=1.5ex,
     colback=white,
     colframe=white,
     fonttitle=\bfseries,
     boxed title style={
-    sharp corners,
-    size=fbox,
-    colback=\titlecolor,
-    colframe=white,
-    borderline west={2mm}{-2mm}{\titlecolor}
+    	enhanced,
+    	left=0mm,
+    	boxrule=0pt,
+    	sharp corners,
+    	colback=\titlecolor,
+    	colframe=white,
+    	borderline west={2mm}{-2.5mm}{\titlecolor}
   },
-  borderline west ={2mm}{-2mm}{\titlecolor},
+  size=minimal,
+  borderline west ={2mm}{-2.5mm}{\titlecolor},
   terminator sign={.}
 }}
