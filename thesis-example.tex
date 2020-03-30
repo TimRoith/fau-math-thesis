@@ -23,10 +23,8 @@
 \colorthemefaumath
 %
 \usepackage{styles/fau-appearence}
-% ########################################################################################
-\newtcbtheorem[number within=chapter]{theorem}{THEOREM}{thmstyle_B}{thm}
-\newtcbtheorem[use counter from=theorem]{definition}{DEFINITION}{thmstyle_plain}{def}
-\newtcbtheorem[use counter from=theorem]{corollary}{COROLLARY}{thmstyle_plain}{cor}
+\usepackage{styles/CommandSpec}
+
 
 \begin{document}
 %\dominitoc
@@ -35,5 +33,5 @@
 \newpage
 %-------------------------------------------------
 \input{chapters/01_chapter_one.tex}
-\input{chapters/01_chapter_one.tex}
+\input{chapters/02_math.tex}
 \end{document}

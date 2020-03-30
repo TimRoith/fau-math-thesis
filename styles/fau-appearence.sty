@@ -1,5 +1,16 @@
-\ProvidesPackage{styles/fau-colors}[Appearance
-									Author: Tim Carsten Otto Roith]
+\ProvidesPackage{styles/fau-appearence}[\filedate Package to be used in combination with
+										the]
+
+% ########################################################################################
+% Options and bools
+% ----------------------------------------------------------------------------------------
+\newif\ifAP@theoremcustom\AP@theoremcustomfalse
+\DeclareOption{thmcust}{\AP@theoremcustomtrue}
+\def\thmstyle{thmstyle_plain}
+\DeclareOption{thmB}{\def\thmstyle{thmstyle_B}}
+
+\ProcessOptions\relax
+
 
 
 % Style 1: Sets Page Number at the Top and Chapter/Section Name on LE/RO
@@ -52,8 +63,12 @@
 	
 % ########################################################################################
 % Theorem and box appearence
+% Here we use the tcolorbox package to style theorems and boxes and add the 
+% cleveref packag for cross referencing
 % ----------------------------------------------------------------------------------------
 \usepackage[most]{tcolorbox}
+\usepackage[nameinlink, capitalise]{cleveref}
+% ----------------------------------------------------------------------------------------	
 % default definition and theorem style
 \tcbset{
 	thmstyle_plain/.style={fonttitle=\bfseries\upshape, fontupper=\slshape,
@@ -121,3 +136,20 @@
   borderline west ={2mm}{-2.5mm}{\titlecolor},
   terminator sign={.}
 }}
+% ----------------------------------------------------------------------------------------
+\ifAP@theoremcustom %
+\else
+	\newtcbtheorem[number within=chapter]{theorem}{THEOREM}{\thmstyle, label type=theorem}{thm}
+	\newtcbtheorem[use counter from=theorem]{definition}{DEFINITION}{\thmstyle, label type=definition}{def}
+	\newtcbtheorem[use counter from=theorem]{corollary}{COROLLARY}{\thmstyle}{cor}
+	\newtcbtheorem[use counter from=theorem]{lemma}{LEMMA}{\thmstyle, label type=lemma}{lem}
+	\newtcbtheorem[use counter from=theorem]{remark}{REMARK}{thmstyle_plain, label type=remark}{rem}
+\fi
+% ########################################################################################
+
+% ########################################################################################
+% Enumerating styles
+% ----------------------------------------------------------------------------------------	
+\usepackage{enumitem}
+\SetEnumitemKey{roman}
+{label=\upshape(\roman*)}

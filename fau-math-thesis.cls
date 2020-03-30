@@ -1,13 +1,14 @@
 % ########################################################################################
 % Class specification
 % ----------------------------------------------------------------------------------------
-\def\classname{fau-math-theis}
-\def\fileversion{0.1}
-\def\filedate{18/03/2020}
+\newcommand{\classname}{fau-math-theis}
+\newcommand{\fileversion}{0.1}
+\newcommand{\filedate}{18/03/2020}
+%\newcommand{\fileauthor}{Tim Roith}
 \def\baseclass{scrbook}
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{fau-math-thesis}[\filedate A class file for a FAU math thesis]
+\ProvidesClass{fau-math-thesis}[\filedate A class file for a FAU math thesis, provided by]
 % ########################################################################################
 % Options and bools
 % ----------------------------------------------------------------------------------------
@@ -18,12 +19,11 @@
 % ------------------------------------------------
 % Bibliography, the options are currently very limited, user can either specify the 
 % the bib stuff himself by using ths option or use the spec from the bib section 
-% down below
+% down below.
 % ------------------------------------------------
 \newif\ifTH@customBib\TH@customBibfalse
 \DeclareOption{customBib}{\TH@customBibtrue}
 % ------------------------------------------------
-%
 %
 \newif\ifTH@PDF\TH@PDFfalse % PDF Option, if false it is a document for actual printing
 \DeclareOption{PDF}{\TH@PDFtrue}
@@ -35,7 +35,8 @@
 \newif\if@oneside\@onesidefalse
 \DeclareOption{oneside}{\PassOptionsToClass{\CurrentOption}{\baseclass}\@onesidetrue}%
 \DeclareOption{twoside}{\PassOptionsToClass{\CurrentOption}{\baseclass}}%
-
+%
+%
 
 
 \DeclareOption*{

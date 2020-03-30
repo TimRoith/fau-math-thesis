@@ -1,0 +1,40 @@
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\chapter{How to do math with this template}\label{ch:math}
+This chapter is dedicated to the functionality of the template concearning its actual and 
+inherent purpose: math. 
+\section{Theorem and Definitions}
+In the following we will use some material from [] to showcase the possibilities. 
+The package used for theorem numbering and styling is tcolorbox.
+\begin{definition}{}{measure}
+A mapping $\mu:2^{X}\rightarrow[0,\infty]$ is called a {\bfseries measure} on the nonempty
+set $X$ provided
+\begin{enumerate}[roman, ref=\thetcbcounter (\roman*)]
+\item $\mu(\emptyset) = 0$ and
+\item \label{en:subadd} if
+\begin{align*}
+A\subset \bigcup_{k\in\N}A_k,
+\end{align*}
+then
+\begin{align*}
+\mu(A)\leq \sum_{k\in\N}\mu(A_k).
+\end{align*}
+\end{enumerate}
+\end{definition}
+We can refernence single items of a enumeration with the help of the enumitem package. 
+For example concerning \cref{def:measure} we can add the informtion that \cref{en:subadd} is 
+called subadditivity.
+\begin{theorem}{MUCH WOW RESULT}{}
+I'm one heckin pretty result! You gotta admit that right?\\
+Look an equation
+\begin{align*}
+a^2+b^2=c^2.
+\end{align*}
+\end{theorem}
+
+Wow i have so much to say.\todo{State what that would actually be!}\newpage
+
+\section{B}
+Hello
+\section{C}
+This is pretty cool section.\newpage
+Do you like lewis huey and the news?
