@@ -13,3 +13,5 @@
 *.run.xml
 *-blx.bib
 *.bcf
+*.bbl
+*.blg
