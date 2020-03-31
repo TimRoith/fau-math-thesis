@@ -14,7 +14,7 @@
 \setpdfinfo % For additional information in the pdf file
 % ########################################################################################
 % bibliography
-% \addbibresource{BA_Bibliography.bib}
+\addbibresource{chapters/thesis-bibliography.bib}
 %
 \usepackage{tabularx}
 \usepackage{graphicx}
@@ -34,4 +34,11 @@
 %-------------------------------------------------
 \input{chapters/01_chapter_one.tex}
 \input{chapters/02_math.tex}
+\nocite{*}
+\printbibliography[type = book,
+                   title = Books,
+                   heading = subbibliography]
+\printbibliography[type = articles,
+                   title = Books,
+                   heading = subbibliography]
 \end{document}

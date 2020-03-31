@@ -1,0 +1,60 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{FineProp2015}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9e3671b8cdea270870f6087835958423}{%
+           family={Evans},
+           familyi={E\bibinitperiod},
+           given={Lawrence\bibnamedelima Craig},
+           giveni={L\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{2}{%
+        {Chapman}%
+        {Hall/CRC}%
+      }
+      \strng{namehash}{9e3671b8cdea270870f6087835958423}
+      \strng{fullhash}{9e3671b8cdea270870f6087835958423}
+      \strng{bibnamehash}{9e3671b8cdea270870f6087835958423}
+      \strng{authorbibnamehash}{9e3671b8cdea270870f6087835958423}
+      \strng{authornamehash}{9e3671b8cdea270870f6087835958423}
+      \strng{authorfullhash}{9e3671b8cdea270870f6087835958423}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781482242386}
+      \field{month}{4}
+      \field{title}{Measure Theory and Fine Properties of Functions, Revised Edition (Textbooks in Mathematics)}
+      \field{year}{2015}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.xarg.org/ref/a/1482242389/
+      \endverb
+      \verb{url}
+      \verb https://www.xarg.org/ref/a/1482242389/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

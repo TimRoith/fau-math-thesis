@@ -267,7 +267,7 @@ von \textbf{\@author}
 			isbn=false,%
 			url=false,%
 			eprint=false,%
-			backend=bibtex%
+			backend=biber %
 ]{biblatex}
 \fi
 % ########################################################################################\\
