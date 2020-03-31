@@ -5,11 +5,14 @@
 % Options and bools
 % ----------------------------------------------------------------------------------------
 \newif\ifAP@theoremcustom\AP@theoremcustomfalse
-\DeclareOption{thmcust}{\AP@theoremcustomtrue}
-\def\thmstyle{thmstyle_plain}
-\DeclareOption{thmB}{\def\thmstyle{thmstyle_B}}
+\DeclareOptionX{thmcust}{\AP@theoremcustomtrue}
 
-\ProcessOptions\relax
+\def\thmstyle{thmstyle_plain}
+\DeclareOptionX{thmboxing}{\def\thmstyle{#1}}
+
+\ExecuteOptionsX{thmboxing=thmstyle_plain}
+
+\ProcessOptionsX
 
 
 
@@ -86,6 +89,7 @@
 %https://tex.stackexchange.com/questions/369430/theorems-and-definitions-boxes-numbering-should-be-chapter-wise
 % ----------------------------------------------------------------------------------------	
 \tcbset{thmstyle_A/.style={
+    reset,
     enhanced,
     sharp corners,
     attach boxed title to top left={

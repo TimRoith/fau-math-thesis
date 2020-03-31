@@ -1,10 +1,55 @@
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-\chapter{How to do math with this template}\label{ch:math}
-This chapter is dedicated to the functionality of the template concearning its actual and 
-inherent purpose: math. 
+\chapter{How to do math}\label{ch:math}
+This chapter is dedicated to the functionality of the template concerning its actual and 
+inherent purpose: mathematics. 
 \section{Theorem and Definitions}
-In the following we will use some material from [] to showcase the possibilities. 
-The package used for theorem numbering and styling is tcolorbox.
+In the following we will use some material from \cite{FineProp2015} to showcase the possibilities. 
+The package used for theorem numbering and styling is 
+\hyperlink{https://www.ctan.org/pkg/tcolorbox}{\texttt{tcolorbox}}, which is a modern and 
+versatile way to create nice boxes embedded in and consistent numbering scheme. The 
+commands which provide the environments for theorems, definitions etc. are defined in the 
+file \textit{styles/fau-appearence.sty}. We will not fully explain how to define these commands 
+within the \texttt{tcolorbox} context, but we will showcase how to use them. The following
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\begin{theorem}{Euler 1763}{fermat}
+Here could be your result.
+\end{theorem}
+\end{lstlisting}
+will result in the output
+\begin{theorem}{Euler 1763}{fermat}
+Here could be your result.
+\end{theorem}
+The number of the theorem is assigned automatically. The second argument defines the theorem 
+addition as displayed above and the third argument defines the name of the label that is used 
+to reference \cref{thm:fermat}. While \LaTeX provides the basic commands for cross-referencing, 
+the use of \texttt{tcolorbox} suggests the usage of the 
+\hyperlink{https://ctan.org/pkg/cleveref}{\texttt{cleveref}} package that enhances some 
+of the basic features and is indeed very clever. The above reference was defined by the 
+command
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\cref{thm:fermat}
+\end{lstlisting}
+where the prefix \texttt{thm:} was defined in the \texttt{tcolorbox} settings. The following 
+environment prefix combinations are provided by \textit{styles/fau-appearence.sty}: 
+\begin{itemize}
+\item theorem - thm,
+\item definiton - def,
+\item lemma - lem,
+\item corollary - cor,
+\item remark - rem.
+\end{itemize}
+The actual appearance of the theorem can be specified by the packet option \texttt{thmboxing} 
+for \texttt{fau-appearence.sty}, where this file uses
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\usepackage[thmboxing=thmstyle_plain]{styles/fau-appearence}.
+\end{lstlisting} 
+.\todo{showcase some of the boxes we provide}
+If you want to specify the style of theorems, definitions etc. you have to use
+\begin{lstlisting}[language={[LaTeX]TeX}]
+renew here plz
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
 \begin{definition}{}{measure}
 A mapping $\mu:2^{X}\rightarrow[0,\infty]$ is called a {\bfseries measure} on the nonempty
 set $X$ provided
@@ -20,7 +65,7 @@ then
 \end{align*}
 \end{enumerate}
 \end{definition}
-We can refernence single items of a enumeration with the help of the enumitem package. 
+We can reference single items of a enumeration with the help of the enumitem package. 
 For example concerning \cref{def:measure} we can add the informtion that \cref{en:subadd} is 
 called subadditivity.
 \begin{theorem}{MUCH WOW RESULT}{}
