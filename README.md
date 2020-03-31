@@ -21,3 +21,4 @@ This all belongs to ME!
 --------------------------------------
 # ToDo
 At this point even the ToDo is a ToDo.
+* We are using a KOMA script now, hence eliminating the fancyhead stuff makes sense.
