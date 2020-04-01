@@ -1,15 +1,20 @@
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \chapter{How to do math}\label{ch:math}
 This chapter is dedicated to the functionality of the template concerning its actual and 
-inherent purpose: mathematics. 
-\section{Theorem and Definitions}
-In the following we will use some material from \cite{FineProp2015} to showcase the possibilities. 
+inherent purpose: mathematics. We use material from \cite{FineProp2015} to showcase 
+the possibilities.
+\section{Theorems and Referencing}
+In this section the term \textit{theorem} does not only refer to a theorem in a mathimatical 
+sense, but in fact to definitions, lemmata, examples, remarks, etc., i.e. the environments 
+you usually need to write a math thesis and want to follow some consistent numbering scheme. 
 The package used for theorem numbering and styling is 
-\hyperlink{https://www.ctan.org/pkg/tcolorbox}{\texttt{tcolorbox}}, which is a modern and 
-versatile way to create nice boxes embedded in and consistent numbering scheme. The 
-commands which provide the environments for theorems, definitions etc. are defined in the 
-file \textit{styles/fau-appearence.sty}. We will not fully explain how to define these commands 
-within the \texttt{tcolorbox} context, but we will showcase how to use them. The following
+\href{https://www.ctan.org/pkg/tcolorbox}{\texttt{tcolorbox}}, which offers a modern and 
+versatile way to create nice boxes around your theorems, while providing the full functionality 
+of the more traditional \href{https://www.ctan.org/pkg/amsthm}{\texttt{amsthm}} package. 
+The necessary commands for theorems are defined in the 
+file \textit{styles/fau-appearence.sty}, so you do not have to worry about that (unless you want to). 
+Hence, we will not fully explain how to define these commands, 
+but we will showcase how to use them. The following code snippet
 \begin{lstlisting}[language={[LaTeX]TeX}]
 \begin{theorem}{Euler 1763}{fermat}
 Here could be your result.
@@ -22,8 +27,8 @@ Here could be your result.
 The number of the theorem is assigned automatically. The second argument defines the theorem 
 addition as displayed above and the third argument defines the name of the label that is used 
 to reference \cref{thm:fermat}. While \LaTeX provides the basic commands for cross-referencing, 
-the use of \texttt{tcolorbox} suggests the usage of the 
-\hyperlink{https://ctan.org/pkg/cleveref}{\texttt{cleveref}} package that enhances some 
+the use of \texttt{tcolorbox} suggests to employ 
+\href{https://ctan.org/pkg/cleveref}{\texttt{cleveref}} package that enhances some 
 of the basic features and is indeed very clever. The above reference was defined by the 
 command
 \begin{lstlisting}[language={[LaTeX]TeX}]
@@ -39,44 +44,83 @@ environment prefix combinations are provided by \textit{styles/fau-appearence.st
 \item remark - rem.
 \end{itemize}
 The actual appearance of the theorem can be specified by the packet option \texttt{thmboxing} 
-for \texttt{fau-appearence.sty}, where this file uses
+for \texttt{fau-appearence.sty}, for example
 \begin{lstlisting}[language={[LaTeX]TeX}]
 \usepackage[thmboxing=thmstyle_plain]{styles/fau-appearence}.
-\end{lstlisting} 
-.\todo{showcase some of the boxes we provide}
-If you want to specify the style of theorems, definitions etc. you have to use
-\begin{lstlisting}[language={[LaTeX]TeX}]
-renew here plz
 \end{lstlisting}
-
+is used to create the document you are reading right now.\todo{showcase some of the boxes we provide}
+It is currently not supported to simply add custom box styles. If you don't want to use the 
+solutions provided by \texttt{fau-appearence.sty} use the \texttt{thmcust} option 
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\usepackage[thmcust]{styles/fau-appearence}
+\end{lstlisting}
+which will not define any theorem environments.\par
+The \texttt{cleveref} links are preset such that link labels are capitalized and carry 
+the link in them. The link colours are set via the \texttt{hyperref} package and follow the 
+defined colour scheme. This can be customized globally by 
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\hypersetup{
+	urlcolor=blue,
+	citecolor=red,
+	linkcolor=green}
+\end{lstlisting}
+but also locally for each link.
+\section{Lists and Enumerations}
+Another key feature you may want to use inside your thesis are lists and enumerations.
+In \LaTeX\ you can simple use the \lstinline[language={[LaTeX]TeX}]|itemize| environment 
+like this
+\begin{lstbox}[]{Itemize}
+\begin{itemize}
+\item The first item,
+\item[$\circ$] a second item with a different bullet type.
+\end{itemize}
+\end{lstbox}
+For enumerations we use the
+\href{https://ctan.org/pkg/enumitem}{\texttt{enumitem}} package, that provides vast 
+options for customization. Take a look at the following definition taken from 
+\cite{FineProp2015},
 %-------------------------------------------------------------------------------
 \begin{definition}{}{measure}
 A mapping $\mu:2^{X}\rightarrow[0,\infty]$ is called a {\bfseries measure} on the nonempty
 set $X$ provided
 \begin{enumerate}[roman, ref=\thetcbcounter (\roman*)]
 \item $\mu(\emptyset) = 0$ and
-\item \label{en:subadd} if
-\begin{align*}
+\item\label{en:subadd} if
+\begin{equation*}
 A\subset \bigcup_{k\in\N}A_k,
-\end{align*}
+\end{equation*}
 then
-\begin{align*}
+\begin{equation*}
 \mu(A)\leq \sum_{k\in\N}\mu(A_k).
-\end{align*}
+\end{equation*}
 \end{enumerate}
 \end{definition}
-We can reference single items of a enumeration with the help of the enumitem package. 
-For example concerning \cref{def:measure} we can add the informtion that \cref{en:subadd} is 
-called subadditivity.
-\begin{theorem}{MUCH WOW RESULT}{}
-I'm one heckin pretty result! You gotta admit that right?\\
-Look an equation
-\begin{align*}
-a^2+b^2=c^2.
-\end{align*}
-\end{theorem}
-
-Wow i have so much to say.\todo{State what that would actually be!}\newpage
+We can reference single items of an enumeration, for example concerning \cref{def:measure} 
+we can add the information that \cref{en:subadd} is called subadditivity. 
+The code that produces this enumeration looks like this:
+\begin{lstbox}[listing only]{Enumerate}
+\begin{enumerate}[roman, ref=\thetcbcounter (\roman*)]
+\item ... % first item
+\item\label{en:subadd} ... % second item
+\end{enumerate} 
+\end{lstbox}
+The option \texttt{roman} is a preset from \texttt{fau-appearence.sty} but you can use 
+any valid style provided by \texttt{enumitem} itself or define one yourself. 
+The argument 
+\lstinline[language={[LaTeX]TeX}]|ref=\thetcbcounter (\roman*)|
+specifies how the label for 
+the reference of this item should be displayed, where \lstinline[language={[LaTeX]TeX}]|\thetcbcounter| 
+refers to the number of the theorem an enumeration was defined in, thus 
+\lstinline[language={[LaTeX]TeX}]|\cref{en:subadd}| results in \cref{en:subadd} 
+instead of \textcolor{\titlecolor}{Item (ii)}. An enumeration outside of a theorem has to use a different
+argument for referencing.
+\begin{lstbox}[]{Enumerate}
+\begin{enumerate}[label=(K\theenumi), ref=MyEnum (K\theenumi)]
+\item ... % first item
+\item\label{en:second} ... % second item
+\end{enumerate} 
+\end{lstbox}
+Here the reference look like this, \cref{en:second}.
 
 \section{B}
 Hello

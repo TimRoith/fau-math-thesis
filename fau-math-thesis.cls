@@ -49,16 +49,7 @@
 \LoadClass[openright, 12pt]{\baseclass}
 
 
-% ########################################################################################
-% Defines the page layout
-% ----------------------------------------------------------------------------------------
-\ifTH@PDF
-\usepackage[includehead,hmargin={3.1cm, 3.1cm}, vmargin={2.5cm,2.7cm}, 
-headsep=.8cm,footskip=1.2cm, marginparsep=0.4cm, marginparwidth=2.7cm]{geometry}
-\else
-\usepackage[includehead,hmargin={3.6cm, 2.6cm}, vmargin={2.5cm,2.7cm}, 
-headsep=.8cm,footskip=1.2cm]{geometry}
-\fi
+
 % ########################################################################################
 %
 %
@@ -311,3 +302,13 @@ von \textbf{\@author}
 % Misc
 % ----------------------------------------------------------------------------------------
 \usepackage{todonotes}
+% ########################################################################################
+% Defines the page layout
+% ----------------------------------------------------------------------------------------
+\ifTH@PDF
+\usepackage[includehead,hmargin={3.1cm, 3.1cm}, vmargin={2.5cm,2.7cm}, 
+headsep=.8cm,footskip=1.2cm, marginparsep=0.4cm, marginparwidth=2.7cm]{geometry}
+\else
+\usepackage[includehead,hmargin={3.6cm, 2.6cm}, vmargin={2.5cm,2.7cm}, 
+headsep=.8cm,footskip=1.2cm]{geometry}
+\fi
