@@ -150,6 +150,15 @@
 	\newtcbtheorem[use counter from=theorem]{lemma}{LEMMA}{\thmstyle, label type=lemma}{lem}
 	\newtcbtheorem[use counter from=theorem]{remark}{REMARK}{thmstyle_plain, label type=remark}{rem}
 \fi
+% ----------------------------------------------------------------------------------------
+% Emphasize stuff
+\newtcolorbox{emphBox}{
+	enhanced,
+	colback=\titlebackground,
+	colframe=\titlecolor,
+	sharp corners,
+	size=small,
+    drop shadow southeast}
 % ########################################################################################
 
 % ########################################################################################
