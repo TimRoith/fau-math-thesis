@@ -1,4 +1,0 @@
-\begin{enumerate}[label=(K\theenumi), ref=MyEnum (K\theenumi)]
-\item ... % first item
-\item\label{en:second} ... % second item
-\end{enumerate}
