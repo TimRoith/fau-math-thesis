@@ -1,4 +1,4 @@
-\documentclass[oneside]{fau-math-thesis}
+\documentclass[fontsize=11pt, oneside, chapterprefix=true]{fau-math-thesis}
 %
 % ########################################################################################
 % The following specifies the titlepage and can not be deleted
@@ -40,11 +40,11 @@
 										listing options={language={[LaTeX]TeX}}}
 
 \begin{document}
-%\dominitoc
-
+\frontmatter
 \maketitle
-\newpage
+\mainmatter
 %-------------------------------------------------
+\input{chapters/00_dedication_abstract.tex}
 \input{chapters/01_introduction.tex}
 \input{chapters/02_math.tex}
 \nocite{*}

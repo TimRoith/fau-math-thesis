@@ -10,60 +10,43 @@
 \def\thmstyle{thmstyle_plain}
 \DeclareOptionX{thmboxing}{\def\thmstyle{#1}}
 
+
+\DeclareOptionX{chapterheader}{\def\thmstyle{#1}}
+
 \ExecuteOptionsX{thmboxing=thmstyle_plain}
 
 \ProcessOptionsX
-
-
-
-% Style 1: Sets Page Number at the Top and Chapter/Section Name on LE/RO
-\fancypagestyle{PageStyleI}{
-	\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
-	\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1\ }}
-	\fancyhf{}
-	\fancyhead[RO]{\nouppercase \rightmark\hspace{0.25em} | 
-		\hspace{0.25em} \bfseries{\thepage}}
-	\fancyhead[LE]{ {\bfseries\thepage} \hspace{0.25em} | 
-		\hspace{0.25em} \nouppercase \leftmark}
-}
-
-% Style 2: Sets Page Number at the Bottom with Chapter/Section Name on LO/RE
-\fancypagestyle{PageStyleII}{
-	\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
-	\renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
-	\fancyhf{}
-	\fancyhead[RO]{\bfseries\nouppercase \rightmark}
-	\fancyhead[LE]{\bfseries \nouppercase \leftmark}
-	\fancyfoot[C]{\thepage}
-}
-
 % ########################################################################################
 % Chapter opening
 % ----------------------------------------------------------------------------------------
-% The following code is inspired by the qoutechap package.
-% ----------------------------------------------------------------------------------------
-\let\size@chapter\huge
-
-\renewcommand{\@makechapterhead}[1]{\chapterheadstartvskip%
-	{\size@chapter
-		{\relax\raggedleft
-			{	\usefont{T1}{ptm}{b}{n}\fontsize{100}{130}\selectfont%
-				\color{\titlecolor}
-				\ifnum \c@secnumdepth >\m@ne%
-				\if@mainmatter\thechapter%
-				\fi\fi
-				\par\nobreak
-			}%
-			{\raggedleft\advance\leftmargin10em\interlinepenalty\@M #1\par}
-		}
-		\nobreak\chapterheadendvskip
-	}
+\RedeclareSectionCommand[
+    beforeskip=1sp,
+    font=\huge\mdseries
+]{chapter}
+%-------------------------------------------------
+\setkomafont{chapter}{\Large}
+\setkomafont{chapterprefix}{\Huge}
+%-------------------------------------------------
+\renewcommand*\chapterformat{%
+    \IfChapterUsesPrefixLine{
+    	\textcolor{\titlebackground}{\chapappifchapterprefix{\ }}
+    	\textcolor{\titlebackground}{\thechapter}
+    }%
+    {%
+    	\textcolor{\titlecolor}{\Huge\thechapter}
+    }%
+}%
+%
+\renewcommand*\chapterlinesformat[3]{%
+    \parbox[b]{\dimexpr\textwidth-1em\relax}{\raggedleft \Huge\textcolor{\titlecolor}{#3}}%
+    \hfill
+    \makebox[0pt][l]{#2}%
 }
-
-\renewcommand{\@makeschapterhead}[1]{%
-	{\let\c@secnumdepth\m@ne\@makechapterhead{#1}}}
-	
-	
+%
+\renewcommand*{\chapterlineswithprefixformat}[3]{%
+	\raggedleft #2%
+	\parbox[b]{\dimexpr\textwidth\relax}{\raggedleft \textcolor{\titlecolor}{#3}}%
+}%
 % ########################################################################################
 % Theorem and box appearence
 % Here we use the tcolorbox package to style theorems and boxes and add the 
@@ -154,7 +137,7 @@
 % Emphasize stuff
 \newtcolorbox{emphBox}{
 	enhanced,
-	colback=\titlebackground,
+	colback=\background,
 	colframe=\titlecolor,
 	sharp corners,
 	size=small,

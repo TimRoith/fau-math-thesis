@@ -37,8 +37,6 @@
 \DeclareOption{twoside}{\PassOptionsToClass{\CurrentOption}{\baseclass}}%
 %
 %
-
-
 \DeclareOption*{
   \PassOptionsToClass{\CurrentOption}{\baseclass}
 }
@@ -46,35 +44,14 @@
 \ProcessOptions\relax
 \ProcessOptionsX
 
-\LoadClass[openright, 12pt]{\baseclass}
-
-
-
+\LoadClass{\baseclass}
 % ########################################################################################
 %
 %
 %
 %
 %
-% ########################################################################################
-% Fancy Header
-% ----------------------------------------------------------------------------------------
-% The fancyhdr package is loaded and the deafault page style is set. Additonal page styles 
-% are defined in the file fau-appearence.sty.
-% ----------------------------------------------------------------------------------------
-\RequirePackage{fancyhdr}
-\renewcommand{\chaptermark}[1]{\markboth {#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-\fancyhf{}
-\fancyhead[LO]{\nouppercase \rightmark}
-\fancyhead[LE,RO]{\bfseries\thepage}
-\fancyhead[RE]{\nouppercase \leftmark}
-\setlength{\headheight}{14.5pt}
-%
-\fancypagestyle{plain}{
-	\fancyhead{}
-	\renewcommand{\headrulewidth}{0pt}
-}
+\usepackage{graphicx}
 % ########################################################################################
 %
 %
@@ -261,7 +238,35 @@ von \textbf{\@author}
 			backend=biber %
 ]{biblatex}
 \fi
-% ########################################################################################\\
+% ########################################################################################
+%
+%
+%
+%
+%
+% ########################################################################################
+% Main, front, back matter, this is copied from 
+% https://github.com/kks32/phd-thesis-template/
+% ########################################################################################
+\renewcommand{\frontmatter}{%
+  \cleardoublepage
+  \@mainmatterfalse
+  \pagenumbering{roman}
+}
+\renewcommand{\mainmatter}{%
+  \cleardoublepage
+  \@mainmattertrue
+  \pagenumbering{arabic}
+}
+\renewcommand{\backmatter}{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \@mainmatterfalse
+}
+% ########################################################################################
 %
 %
 %
@@ -302,6 +307,9 @@ von \textbf{\@author}
 % Misc
 % ----------------------------------------------------------------------------------------
 \usepackage{todonotes}
+% Don't break enumeration (etc.) across pages in an ugly manner
+\clubpenalty=10000
+\widowpenalty=10000
 % ########################################################################################
 % Defines the page layout
 % ----------------------------------------------------------------------------------------
