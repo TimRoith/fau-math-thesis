@@ -10,8 +10,8 @@
 \def\thmstyle{thmstyle_plain}
 \DeclareOptionX{thmboxing}{\def\thmstyle{#1}}
 
-
-\DeclareOptionX{chapterheader}{\def\thmstyle{#1}}
+\def\chapterheaderstyle{\cheadstyle@default}
+\DeclareOptionX{chapterheader}{\def\chapterheaderstyle{\csname cheadstyle@#1\endcsname}}
 
 \ExecuteOptionsX{thmboxing=thmstyle_plain}
 
@@ -19,34 +19,73 @@
 % ########################################################################################
 % Chapter opening
 % ----------------------------------------------------------------------------------------
-\RedeclareSectionCommand[
-    beforeskip=1sp,
-    font=\huge\mdseries
-]{chapter}
-%-------------------------------------------------
-\setkomafont{chapter}{\Large}
-\setkomafont{chapterprefix}{\Huge}
-%-------------------------------------------------
-\renewcommand*\chapterformat{%
-    \IfChapterUsesPrefixLine{
-    	\textcolor{\titlebackground}{\chapappifchapterprefix{\ }}
-    	\textcolor{\titlebackground}{\thechapter}
-    }%
-    {%
-    	\textcolor{\titlecolor}{\Huge\thechapter}
-    }%
-}%
-%
-\renewcommand*\chapterlinesformat[3]{%
-    \parbox[b]{\dimexpr\textwidth-1em\relax}{\raggedleft \Huge\textcolor{\titlecolor}{#3}}%
-    \hfill
-    \makebox[0pt][l]{#2}%
+% the default chapter header
+% ----------------------------------------------------------------------------------------
+\def\cheadstyle@default{} % currently empty
+% ----------------------------------------------------------------------------------------
+% styleA: I dont know if I really like needs some tweaking probably. Furthermore I can't 
+% really describe where im going with this or what it should represent, what is its core the 
+% main idea?
+% ----------------------------------------------------------------------------------------
+\def\cheadstyle@styleA{
+	\RedeclareSectionCommand[
+	    beforeskip=1sp,
+	    font=\huge\mdseries
+	]{chapter}
+	%-------------------------------------------------
+	\setkomafont{chapter}{\Large}
+	\setkomafont{chapterprefix}{\Huge}
+	%-------------------------------------------------
+	\renewcommand*\chapterformat{%
+	    \IfChapterUsesPrefixLine{
+	    	\textcolor{\colmainlight}{\chapappifchapterprefix{\ }}
+	    	\textcolor{\colmainlight}{\thechapter}
+	    }%
+	    {%
+	    	\textcolor{\colmain}{\Huge\thechapter}
+	    }%
+	}%
+	%
+	\renewcommand*\chapterlinesformat[3]{%
+	    \parbox[b]{\dimexpr\textwidth-1em\relax}{\raggedleft \Huge\textcolor{\colmain}{##3}}%
+	    \hfill
+	    \makebox[0pt][l]{##2}%
+	}
+	%
+	\renewcommand*{\chapterlineswithprefixformat}[3]{%
+		\raggedleft ##2%
+		\parbox[b]{\dimexpr\textwidth\relax}{\raggedleft \textcolor{\colmain}{##3}}%
+	}%
 }
-%
-\renewcommand*{\chapterlineswithprefixformat}[3]{%
-	\raggedleft #2%
-	\parbox[b]{\dimexpr\textwidth\relax}{\raggedleft \textcolor{\titlecolor}{#3}}%
-}%
+% ----------------------------------------------------------------------------------------
+% styleB: Inspired by #
+% https://tex.stackexchange.com/questions/330243/chapter-heading-formatting-with-scrreprt
+% ----------------------------------------------------------------------------------------
+\def\cheadstyle@styleB{
+	\newsavebox{\faumath@chapter}
+	\newcommand\faumath@chapter@marker[1][0cm]{%
+	  \sbox\faumath@chapter{%
+	    \resizebox{!}{##1}{\setlength{\fboxsep}{0pt}%
+	        \colorbox{white}{\color{black}\thechapter}}}%
+	  \raisebox{\depth}{\usebox{\faumath@chapter}}%
+	}
+	\renewcommand*{\chapterformat}{\faumath@chapter@marker[1.4cm]}
+	
+	\renewcommand\chapterlinesformat[3]{%
+	  \ifstr{##1}{chapter}
+	  {%
+	    \makebox[\textwidth][l]{%
+	      \parbox[b]{\textwidth-1.6em}{\raggedchapter ##3}%
+	      \makebox[0pt][l]{##2}%
+	    }\\*[-.5\baselineskip]
+	    \rule{\textwidth}{.4pt}%
+	    \par%
+	  }
+	  {\@hangfrom{##2}{##3}}%
+	}
+}
+
+\chapterheaderstyle % execute option
 % ########################################################################################
 % Theorem and box appearence
 % Here we use the tcolorbox package to style theorems and boxes and add the 
@@ -57,7 +96,9 @@
 % ----------------------------------------------------------------------------------------	
 % default definition and theorem style
 \tcbset{
-	thmstyle_plain/.style={fonttitle=\bfseries\upshape, fontupper=\slshape,
+	thmstyle_plain/.style={fonttitle=\bfseries\upshape, 
+	fontupper=\slshape,
+	breakable,
 	before skip=15pt, % space before env
 	colback=white, boxrule=0pt, colframe=white, % no visible frame, no visible background
 	coltitle=black, % Titlecolor
@@ -74,6 +115,7 @@
 \tcbset{thmstyle_A/.style={
     reset,
     enhanced,
+    breakable,
     sharp corners,
     attach boxed title to top left={
       yshift=-4mm,
@@ -83,13 +125,13 @@
     coltitle=white,
     top=1.5ex,
     colback=white,
-    colframe=\titlecolor,
+    colframe=\colmain,
     fonttitle=\bfseries,
     boxed title style={
     sharp corners,
     size=small,
-    colback=\titlecolor,
-    colframe=\titlebackground,
+    colback=\colmain,
+    colframe=\colmainlight,
   },
   terminator sign={.}
 }}
@@ -116,12 +158,12 @@
     	left=0mm,
     	boxrule=0pt,
     	sharp corners,
-    	colback=\titlecolor,
+    	colback=\colmain,
     	colframe=white,
-    	borderline west={2mm}{-2.5mm}{\titlecolor}
+    	borderline west={2mm}{-2.5mm}{\colmain}
   },
   size=minimal,
-  borderline west ={2mm}{-2.5mm}{\titlecolor},
+  borderline west ={2mm}{-2.5mm}{\colmain},
   terminator sign={.}
 }}
 % ----------------------------------------------------------------------------------------
@@ -137,8 +179,8 @@
 % Emphasize stuff
 \newtcolorbox{emphBox}{
 	enhanced,
-	colback=\background,
-	colframe=\titlecolor,
+	colback=\colmainlight,
+	colframe=\colmain,
 	sharp corners,
 	size=small,
     drop shadow southeast}

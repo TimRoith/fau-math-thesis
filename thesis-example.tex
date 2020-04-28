@@ -1,4 +1,4 @@
-\documentclass[fontsize=11pt, oneside, chapterprefix=true]{fau-math-thesis}
+\documentclass[fontsize=11pt, oneside, chapterprefix=false]{fau-math-thesis}
 %
 % ########################################################################################
 % The following specifies the titlepage and can not be deleted
@@ -21,7 +21,7 @@
 \usepackage{styles/fau-colors}
 \colorthemefaumath
 %
-\usepackage[thmboxing=thmstyle_plain]{styles/fau-appearence}
+\usepackage[thmboxing=thmstyle_plain, chapterheader=styleB]{styles/fau-appearence}
 \usepackage{styles/CommandSpec}
 
 
@@ -33,7 +33,7 @@
     breaklines=true,
     basicstyle=\ttfamily\scriptsize,
     keywordstyle=\color{blue},
-    identifierstyle=\color{\titlecolor},
+    identifierstyle=\color{\colmain},
 }
 \newtcblisting[auto counter]{lstbox}[2][]{thmstyle_A, 
 										title=Listing \thetcbcounter: #2,#1, 

@@ -4,7 +4,7 @@
 \newcommand{\classname}{fau-math-theis}
 \newcommand{\fileversion}{0.1}
 \newcommand{\filedate}{18/03/2020}
-%\newcommand{\fileauthor}{Tim Roith}
+\newcommand{\cfileauthor}{Tim Roith}
 \def\baseclass{scrbook}
 
 \NeedsTeXFormat{LaTeX2e}
@@ -68,21 +68,20 @@
 % ----------------------------------------------------------------------------------------
 \usepackage{xcolor}
 %
-\define@key{color}{titlecolor}{\def\titlecolor{#1}}
-\define@key{color}{titlebackground}{\def\titlebackground{#1}}
-\define@key{color}{background}{\def\background{#1}}
-\define@key{color}{titleboxcolor}{\def\titleboxcolor{#1}}
-\define@key{color}{boxcolor}{\def\boxcolor{#1}}
-\setkeys{color}{titlecolor = black, titlebackground = white, background = white,%
-				titleboxcolor = black, boxcolor = black}{}
+\define@key{color}{colmain}{\def\colmain{#1}}
+\define@key{color}{colmainlight}{\def\colmainlight{#1}}
+\define@key{color}{colmainllight}{\def\colmainllight{#1}}
+\define@key{color}{colmainlllight}{\def\colmainlllight{#1}}
+\setkeys{color}{colmain = black, colmainlight = white, colmainllight = white,%
+				colmainlllight = white}{}
 %
 %
 \def\colors#1{
-\setkeys{color}{#1}	
+\setkeys{color}{#1}
 \hypersetup{
-		urlcolor=\titlecolor,
-		citecolor=\titleboxcolor,
-		linkcolor=\titlecolor}
+		urlcolor=\colmain,
+		citecolor=\colmainlight,
+		linkcolor=\colmainlight}
 }
 % ########################################################################################
 %
