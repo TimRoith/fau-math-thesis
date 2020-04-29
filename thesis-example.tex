@@ -1,4 +1,4 @@
-\documentclass[fontsize=11pt, oneside, chapterprefix=false]{fau-math-thesis}
+\documentclass[fontsize=11pt, twoside, chapterprefix=false]{fau-math-thesis}
 %
 % ########################################################################################
 % The following specifies the titlepage and can not be deleted
@@ -21,7 +21,7 @@
 \usepackage{styles/fau-colors}
 \colorthemefaumath
 %
-\usepackage[thmboxing=thmstyle_plain, chapterheader=styleB]{styles/fau-appearence}
+\usepackage[thmboxing=thmstyle_plain, chapterheader=styleB, footerheader=styleC]{styles/fau-appearence}
 \usepackage{styles/CommandSpec}
 
 
@@ -51,7 +51,7 @@
 \printbibliography[type = book,
                    title = Books,
                    heading = subbibliography]
-\printbibliography[type = articles,
+\printbibliography[type = article,
                    title = Books,
                    heading = subbibliography]
 \end{document}

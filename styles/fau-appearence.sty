@@ -9,12 +9,17 @@
 
 \def\thmstyle{thmstyle_plain}
 \DeclareOptionX{thmboxing}{\def\thmstyle{#1}}
-
+% ----------------------------------------------------------------------------------------
+% chapter headers
 \def\chapterheaderstyle{\cheadstyle@default}
 \DeclareOptionX{chapterheader}{\def\chapterheaderstyle{\csname cheadstyle@#1\endcsname}}
-
+% ----------------------------------------------------------------------------------------
+% header and footer
+\def\footerheaderstyle{\fheadstyle@default}
+\DeclareOptionX{footerheader}{\def\footerheaderstyle{\csname fheadstyle@#1\endcsname}}
+%
 \ExecuteOptionsX{thmboxing=thmstyle_plain}
-
+%
 \ProcessOptionsX
 % ########################################################################################
 % Chapter opening
@@ -84,8 +89,40 @@
 	  {\@hangfrom{##2}{##3}}%
 	}
 }
-
 \chapterheaderstyle % execute option
+% ########################################################################################
+%
+%
+%
+%
+%
+%
+% ########################################################################################
+% Footer and header styles. It is best pratice to use the scrlayer-scrpage package here!
+% ----------------------------------------------------------------------------------------
+\RequirePackage{scrlayer-scrpage}
+% ----------------------------------------------------------------------------------------
+% The dafault footer header options
+% ----------------------------------------------------------------------------------------
+\def\fheadstyle@default{} % currently empty
+% ----------------------------------------------------------------------------------------
+% styleA: Inspired by 
+%https://tex.stackexchange.com/questions/261148/how-to-produce-a-headsepline-from-the-border-of-the-page-to-the-end-of-the-chapt
+% ----------------------------------------------------------------------------------------
+\def\fheadstyle@styleB{
+	\ohead{%
+  		\Ifthispageodd{\makebox[0pt][l]{\rule[-5pt]{\paperwidth}{.4pt}}}{}%
+  		\headmark%
+  		\Ifthispageodd{}{\makebox[0pt][r]{\rule[-5pt]{\paperwidth}{.4pt}}}%
+	}
+}
+% ----------------------------------------------------------------------------------------
+% styleC:
+% ----------------------------------------------------------------------------------------
+\def\fheadstyle@styleC{
+
+}
+\footerheaderstyle % execute
 % ########################################################################################
 % Theorem and box appearence
 % Here we use the tcolorbox package to style theorems and boxes and add the 
