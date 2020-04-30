@@ -1,8 +1,66 @@
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-\chapter{How to do math with this very cool class i wrote ;)}\label{ch:math}
+\chapter{Writing a math thesis with \texttt{\classname}}\label{ch:math}
 This chapter is dedicated to the functionality of the template concerning its actual and 
 inherent purpose: mathematics. We use material from \cite{FineProp2015} to showcase 
 the possibilities.
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\section{Page layout}
+In order to write anything on a sheet of paper, you will need a basic understanding 
+of typography. While there exists a strong theory behind this whole topic, we will 
+not dive too deep and only give minimal introduction. One should however keep in mind that 
+going freestyle on your page design greatly endangers the overall quality of your document. 
+So if you're not an expert on typography, it is probably best practice to just use the 
+possibilities provided by \texttt{KOMA-script} 
+(especially the \href{https://ctan.org/pkg/enumitem}{\texttt{typearea}} package), 
+or any package where you can be sure that 
+the author has a solid typographical background. Further information on this topic may be 
+found in \cite{Tschichold75, Willberg99}.
+\paragraph{Page vs. paper}
+In order to display our thoughts and ideas we first need some kind of canvas, which we
+refer to as \textit{paper}. If you're writing a, thesis the size of this 
+should almost always be of a A4 or A5 format. Once you've chosen the paper size you 
+need to specify the area where you want to put stuff, which is refereed to as \textit{page}.
+\begin{emphBox}
+The paper does not necessarily coincide with the page.
+\end{emphBox}
+For simplicity---as hinted above---we will assume that the page is contained in the paper. 
+At first it might seem odd, as to why we differentiate be paper and page, but there is a 
+simple practical example that explains why it is not a good idea to think of the paper as 
+a page, using the above terminology. Suppose you print 
+out your document and want to assemble the sheets of paper in some kind of fixed bundle 
+this usually happens via \textit{binding}. You can think of this as gluing small stripes 
+of the paper together, thus greatly decreasing the visibility of anything printed 
+specifically on this area. It is therefore useful not to think of the page as the whole paper.
+\par
+\paragraph{Arrangement of a page} There are four main instances placed on the page, namely:
+\begin{itemize}
+\item the body of text: most of the things you write will be put in here, it should 
+be the dominant instance of the page,
+\item the header: a field above the body, which will display information about the 
+current chapter, section, etc.,
+\item the footer: a field below the body, which usually displays the pagination,
+\item two margins: two fields placed to the right and left of the body, of which one 
+actually displays marginal notes and the other is only placed for symmetrical reasons,
+\end{itemize}
+see \cref{fig:play}. Having identified the main instances of our page, we now need to 
+define their positions and dimensions. In order to this in a way that is consistent with 
+the basic rules of typography, we employ the package \texttt{typearea}.
+%-----------------------------------------------------------------------------------------
+\begin{figure}
+\currentpage
+\printheadingsfalse
+\printparametersfalse
+\marginparswitchtrue
+\pagedesign
+\caption{The basic ingredients of our page, this graphic was created by the 
+\texttt{layouts} package} \label{fig:play}
+\end{figure}
+%-----------------------------------------------------------------------------------------
+
+
+
+
+
 \section{Theorems and Referencing}
 In this section the term \textit{theorem} does not only refer to a theorem in a mathimatical 
 sense, but in fact to definitions, lemmata, examples, remarks, etc., i.e. the environments 
@@ -123,7 +181,9 @@ argument for referencing.
 Here the reference look like this, \cref{en:second}.
 
 \section{B}
-Hello
+\kant
+\printinunitsof{pt}{\pagevalues}
+\pagediagram
 \section{C}
 This is pretty cool section.\newpage
 Do you like lewis huey and the news?

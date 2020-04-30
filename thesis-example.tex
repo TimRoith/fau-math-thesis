@@ -1,4 +1,10 @@
-\documentclass[fontsize=11pt, twoside, chapterprefix=false]{fau-math-thesis}
+\documentclass[fontsize=11pt, % size of the font
+			   % oneside, % other option: oneside
+			   % chapterprefix=false, % specifies if the word chapter is printed for chapter headings
+			   % BCOR=0mm, % offset for binding
+			   PDF, % sets twosided=semi, BCOR=0, DIV=classic if not specified
+			   showframe, % show the page layout
+			   ]{fau-math-thesis}
 %
 % ########################################################################################
 % The following specifies the titlepage and can not be deleted
@@ -14,7 +20,7 @@
 \setpdfinfo % For additional information in the pdf file
 % ########################################################################################
 % bibliography
-\addbibresource{chapters/thesis-bibliography.bib}
+\addbibresource{bibliography/thesis-bibliography.bib}
 %
 
 %
@@ -24,7 +30,8 @@
 \usepackage[thmboxing=thmstyle_plain, chapterheader=styleB, footerheader=styleC]{styles/fau-appearence}
 \usepackage{styles/CommandSpec}
 
-
+\usepackage{kantlipsum}
+\usepackage{layouts}
 \usepackage{tabularx}
 \usepackage{graphicx}
 \tcbuselibrary{listings}
@@ -47,7 +54,6 @@
 \input{chapters/00_dedication_abstract.tex}
 \input{chapters/01_introduction.tex}
 \input{chapters/02_math.tex}
-\nocite{*}
 \printbibliography[type = book,
                    title = Books,
                    heading = subbibliography]

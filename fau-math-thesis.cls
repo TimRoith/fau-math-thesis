@@ -20,30 +20,76 @@
 % Bibliography, the options are currently very limited, user can either specify the 
 % the bib stuff himself by using ths option or use the spec from the bib section 
 % down below.
-% ------------------------------------------------
+% ----------------------------------------------------------------------------------------
 \newif\ifTH@customBib\TH@customBibfalse
-\DeclareOption{customBib}{\TH@customBibtrue}
-% ------------------------------------------------
-%
+\DeclareOptionX{customBib}{\TH@customBibtrue}
+% ----------------------------------------------------------------------------------------
+% Options for the page layout within KOMA
+\newif\ifFAU@setBCOR\FAU@setBCORfalse
+\newif\ifFAU@setDIV\FAU@setDIVfalse
+\newif\ifFAU@setSided\FAU@setSidedfalse
+% Binding offset
+\DeclareOptionX{BCOR}{
+	\FAU@setBCORtrue
+	\PassOptionsToClass{\CurrentOption}{\baseclass}
+}%
+% DIV calculation
+\DeclareOptionX{DIV}{
+	\FAU@setDIVtrue
+	\PassOptionsToClass{\CurrentOption}{\baseclass}
+}%
+% two or onesided definition
+\DeclareOptionX{oneside}{
+	\FAU@setSidedtrue
+	\PassOptionsToClass{\CurrentOption}{\baseclass}
+}%
+\DeclareOptionX{twoside}{
+	\FAU@setSidedtrue
+	\PassOptionsToClass{\CurrentOption}{\baseclass}
+}%
+% ----------------------------------------------------------------------------------------
+% If the page layout is not set by options and the PDF option is set we now specify
+% the page layout by means of the KOMA script.
+% ----------------------------------------------------------------------------------------
 \newif\ifTH@PDF\TH@PDFfalse % PDF Option, if false it is a document for actual printing
-\DeclareOption{PDF}{\TH@PDFtrue}
-%
-%
-\DeclareOption{showframe}{\PassOptionsToPackage{showframe}{geometry}}
-%
-%
-\newif\if@oneside\@onesidefalse
-\DeclareOption{oneside}{\PassOptionsToClass{\CurrentOption}{\baseclass}\@onesidetrue}%
-\DeclareOption{twoside}{\PassOptionsToClass{\CurrentOption}{\baseclass}}%
-%
-%
-\DeclareOption*{
-  \PassOptionsToClass{\CurrentOption}{\baseclass}
+\DeclareOptionX{PDF}{
+	\TH@PDFtrue
+	% DIV SETTING
+	\ifFAU@setDIV % it has already been set
+		\ClassWarningNoLine{\classname}{The Option DIV has already been set. The 
+		PDF option will not reset this value. If you want to use the default settings
+		of PDF do not specify a DIV value.}
+	\else
+		\PassOptionsToClass{DIV=classic}{\baseclass}
+	\fi
+	% BINDING
+	\ifFAU@setBCOR % it has already been set
+		\ClassWarningNoLine{\classname}{The Option BCOR has already been set. The 
+		PDF option will not reset this value. If you want to use the default settings
+		of PDF do not specify a BCOR value.}
+	\else
+		\PassOptionsToClass{BCOR=0mm}{\baseclass}
+	\fi
+	% TWO-ONESIDED
+	\ifFAU@setSided % it has already been set, probably output something
+		\ClassWarningNoLine{\classname}{The Option side has already been set. The 
+		PDF option will not reset this value. If you want to use the default settings
+		of PDF do not specify a side value.}	
+	\else
+		\PassOptionsToClass{oneside}{\baseclass}
+	\fi
 }
+% ----------------------------------------------------------------------------------------
+\DeclareOptionX{showframe}{\PassOptionsToPackage{showframe}{geometry}}
+% ----------------------------------------------------------------------------------------
+% We might need these values for internal use, so let's consider them
 
-\ProcessOptions\relax
+% ----------------------------------------------------------------------------------------
+% This passes all the options not considered so far to \baseclass
+\DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{\baseclass}}
 \ProcessOptionsX
-
+% ----------------------------------------------------------------------------------------
+% We can now load our baseclass
 \LoadClass{\baseclass}
 % ########################################################################################
 %
@@ -92,7 +138,7 @@
 % ########################################################################################
 % Datetime commands
 % ----------------------------------------------------------------------------------------
-\usepackage[american, german]{babel}
+\usepackage[german, american]{babel}
 \usepackage[ngerman]{datetime}
 \newdateformat{gerformat}{\THEDAY{.}\hspace{3pt}\monthname[\THEMONTH] \THEYEAR}
 % ########################################################################################
@@ -247,24 +293,24 @@ von \textbf{\@author}
 % Main, front, back matter, this is copied from 
 % https://github.com/kks32/phd-thesis-template/
 % ########################################################################################
-\renewcommand{\frontmatter}{%
-  \cleardoublepage
-  \@mainmatterfalse
-  \pagenumbering{roman}
-}
-\renewcommand{\mainmatter}{%
-  \cleardoublepage
-  \@mainmattertrue
-  \pagenumbering{arabic}
-}
-\renewcommand{\backmatter}{%
-  \if@openright
-    \cleardoublepage
-  \else
-    \clearpage
-  \fi
-  \@mainmatterfalse
-}
+%\renewcommand{\frontmatter}{%
+%  \cleardoublepage
+%  \@mainmatterfalse
+%  \pagenumbering{roman}
+%}
+%\renewcommand{\mainmatter}{%
+%  \cleardoublepage
+%  \@mainmattertrue
+%  \pagenumbering{arabic}
+%}
+%\renewcommand{\backmatter}{%
+%  \if@openright
+%    \cleardoublepage
+%  \else
+%    \clearpage
+%  \fi
+%  \@mainmatterfalse
+%}
 % ########################################################################################
 %
 %
@@ -310,12 +356,12 @@ von \textbf{\@author}
 \clubpenalty=10000
 \widowpenalty=10000
 % ########################################################################################
-% Defines the page layout
+%
+%
+%
+%
+%
+% ########################################################################################
+% Defines the page layout. We now use the KOMA options instead of the geometry package.
 % ----------------------------------------------------------------------------------------
-\ifTH@PDF
-\usepackage[includehead,hmargin={3.1cm, 3.1cm}, vmargin={2.5cm,2.7cm}, 
-headsep=.8cm,footskip=1.2cm, marginparsep=0.4cm, marginparwidth=2.7cm]{geometry}
-\else
-\usepackage[includehead,hmargin={3.6cm, 2.6cm}, vmargin={2.5cm,2.7cm}, 
-headsep=.8cm,footskip=1.2cm]{geometry}
-\fi
+\usepackage[pass]{geometry} % This is just loaded for showframe
