@@ -25,7 +25,7 @@ actually started as a LaTeX tutorial and we will try to provide a similiar
 one in the example file of this repo. Here we use a rather unconventional 
 format, which will be a didactic introduction to the class.
 # Git Workflow
-Mess around with forks, this helps!
+We plan to incorporate a short explaination of how to properly employ forks and clones.
 # License
 License is MIT. We are aware of more specific solutions for LaTeX documents, 
 but it is not clear yet, which license will enable students to use this 
