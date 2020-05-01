@@ -3,7 +3,7 @@ FAU math thesis
 # Description
 A LaTex template for math students of FAU.
 # Authors
-* Tim Roith
+Tim Roith
 # What does it do?
 The provided class and style files set up a convinient environment that 
 allows students to create a good looking thesis. The class is designed 
