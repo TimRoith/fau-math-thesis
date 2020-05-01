@@ -1,9 +1,9 @@
 % ########################################################################################
 % Class specification
 % ----------------------------------------------------------------------------------------
-\newcommand{\classname}{fau-math-theis}
+\newcommand{\classname}{fau-math-thesis}
 \newcommand{\fileversion}{0.1}
-\newcommand{\filedate}{18/03/2020}
+\newcommand{\filedate}{02/05/2020}
 \newcommand{\cfileauthor}{Tim Roith}
 \def\baseclass{scrbook}
 
@@ -48,11 +48,14 @@
 	\PassOptionsToClass{\CurrentOption}{\baseclass}
 }%
 % ----------------------------------------------------------------------------------------
-% If the page layout is not set by options and the PDF option is set we now specify
+% If the page layout is not set by options and the PDF or print option is set we now specify
 % the page layout by means of the KOMA script.
 % ----------------------------------------------------------------------------------------
-\newif\ifTH@PDF\TH@PDFfalse % PDF Option, if false it is a document for actual printing
-\DeclareOptionX{PDF}{
+\newif\ifTH@PDF\TH@PDFfalse % PDF Option, a document for PDF viewers
+\newif\ifFAU@print\FAU@printfalse % print Option, a document for pinting
+% ----------------------------------------------------------------------------------------
+\DeclareOptionX{PDF}{\TH@PDFtrue}
+\DeclareOptionX{setPDF}{
 	\TH@PDFtrue
 	% DIV SETTING
 	\ifFAU@setDIV % it has already been set
@@ -80,6 +83,34 @@
 	\fi
 }
 % ----------------------------------------------------------------------------------------
+\DeclareOptionX{print}{\FAU@printtrue}
+\DeclareOptionX{setprint}{
+	\FAU@printtrue
+	% DIV SETTING
+	\ifFAU@setDIV % it has already been set
+	\ClassWarningNoLine{\classname}{The Option DIV has already been set. The 
+	print option will not reset this value. If you want to use the default settings
+	of PDF do not specify a DIV value.}
+	\else
+		\PassOptionsToClass{DIV=classic}{\baseclass}
+	\fi
+	% BINDING
+	\ifFAU@setBCOR % it has already been set
+	\else
+		\ClassWarningNoLine{\classname}{The Option BCOR has not been set yet! The 
+		print option will set it to BCOR=5mm. You should actually set this value yourself!}
+		\PassOptionsToClass{BCOR=15mm}{\baseclass}
+	\fi
+	% TWO-ONESIDED
+	\ifFAU@setSided % it has already been set, probably output something
+	\ClassWarningNoLine{\classname}{The Option side has already been set. The 
+	print option will not reset this value. If you want to use the default settings
+	of PDF do not specify a side value.}	
+	\else
+		\PassOptionsToClass{twoside}{\baseclass}
+	\fi		
+}
+% ----------------------------------------------------------------------------------------
 \DeclareOptionX{showframe}{\PassOptionsToPackage{showframe}{geometry}}
 % ----------------------------------------------------------------------------------------
 % We might need these values for internal use, so let's consider them
@@ -97,6 +128,7 @@
 %
 %
 %
+% ########################################################################################
 \usepackage{graphicx}
 % ########################################################################################
 %
@@ -126,8 +158,8 @@
 \setkeys{color}{#1}
 \hypersetup{
 		urlcolor=\colmain,
-		citecolor=\colmainlight,
-		linkcolor=\colmainlight}
+		citecolor=\colmain,
+		linkcolor=\colmain}
 }
 % ########################################################################################
 %
@@ -290,28 +322,6 @@ von \textbf{\@author}
 %
 %
 % ########################################################################################
-% Main, front, back matter, this is copied from 
-% https://github.com/kks32/phd-thesis-template/
-% ########################################################################################
-%\renewcommand{\frontmatter}{%
-%  \cleardoublepage
-%  \@mainmatterfalse
-%  \pagenumbering{roman}
-%}
-%\renewcommand{\mainmatter}{%
-%  \cleardoublepage
-%  \@mainmattertrue
-%  \pagenumbering{arabic}
-%}
-%\renewcommand{\backmatter}{%
-%  \if@openright
-%    \cleardoublepage
-%  \else
-%    \clearpage
-%  \fi
-%  \@mainmatterfalse
-%}
-% ########################################################################################
 %
 %
 %
@@ -351,7 +361,6 @@ von \textbf{\@author}
 % ########################################################################################
 % Misc
 % ----------------------------------------------------------------------------------------
-\usepackage{todonotes}
 % Don't break enumeration (etc.) across pages in an ugly manner
 \clubpenalty=10000
 \widowpenalty=10000

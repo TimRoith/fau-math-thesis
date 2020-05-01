@@ -1,9 +1,10 @@
 \documentclass[fontsize=11pt, % size of the font
+			   chapterprefix=true,
 			   % oneside, % other option: oneside
 			   % chapterprefix=false, % specifies if the word chapter is printed for chapter headings
 			   % BCOR=0mm, % offset for binding
-			   PDF, % sets twosided=semi, BCOR=0, DIV=classic if not specified
-			   showframe, % show the page layout
+			   setPDF, % sets twosided=semi, BCOR=0, DIV=classic if not specified
+			   % showframe, % show the page layout
 			   ]{fau-math-thesis}
 %
 % ########################################################################################
@@ -27,37 +28,53 @@
 \usepackage{styles/fau-colors}
 \colorthemefaumath
 %
-\usepackage[thmboxing=thmstyle_plain, chapterheader=styleB, footerheader=styleC]{styles/fau-appearence}
+\usepackage[thmboxing=styleA,
+			boxingstyle=styleA,
+			chapterheader=styleA, 
+			footerheader=styleA]{styles/fau-appearence}
 \usepackage{styles/CommandSpec}
 
 \usepackage{kantlipsum}
 \usepackage{layouts}
 \usepackage{tabularx}
 \usepackage{graphicx}
+\usepackage{todonotes}
 \tcbuselibrary{listings}
 \lstset
-{
+{	language={[LaTeX]TeX},
     breaklines=true,
-    basicstyle=\ttfamily\scriptsize,
+    basicstyle=\ttfamily,
     keywordstyle=\color{blue},
     identifierstyle=\color{\colmain},
+    texcsstyle=*\color{\colmain},
+    commentstyle=\color{gray}
 }
-\newtcblisting[auto counter]{lstbox}[2][]{thmstyle_A, 
-										title=Listing \thetcbcounter: #2,#1, 
-										listing options={language={[LaTeX]TeX}}}
+\newtcblisting[auto counter, number within=chapter]{lstbox}[2][]{
+			   styleA, 
+			   title=LISTING \thetcbcounter: #2,#1, 
+			   listing options={language={[LaTeX]TeX}}}
+
 
 \begin{document}
+%-------------------------------------------------
 \frontmatter
+%-------------------------------------------------
 \maketitle
+\tableofcontents
+\newpage
+%-------------------------------------------------
 \mainmatter
 %-------------------------------------------------
 \input{chapters/00_dedication_abstract.tex}
 \input{chapters/01_introduction.tex}
 \input{chapters/02_math.tex}
+%-------------------------------------------------
+\backmatter
+%-------------------------------------------------
 \printbibliography[type = book,
                    title = Books,
                    heading = subbibliography]
 \printbibliography[type = article,
-                   title = Books,
+                   title = Articles,
                    heading = subbibliography]
 \end{document}

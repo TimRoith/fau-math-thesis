@@ -9,6 +9,9 @@
 
 \def\thmstyle{thmstyle_plain}
 \DeclareOptionX{thmboxing}{\def\thmstyle{#1}}
+%
+\def\boxingstyle{\bstyle@default}
+\DeclareOptionX{boxingstyle}{\def\boxingstyle{\csname bstyle@#1\endcsname}}
 % ----------------------------------------------------------------------------------------
 % chapter headers
 \def\chapterheaderstyle{\cheadstyle@default}
@@ -28,42 +31,33 @@
 % ----------------------------------------------------------------------------------------
 \def\cheadstyle@default{} % currently empty
 % ----------------------------------------------------------------------------------------
-% styleA: I dont know if I really like needs some tweaking probably. Furthermore I can't 
-% really describe where im going with this or what it should represent, what is its core the 
-% main idea?
+% styleA: Consistent with styleA design scheme
 % ----------------------------------------------------------------------------------------
 \def\cheadstyle@styleA{
-	\RedeclareSectionCommand[
-	    beforeskip=1sp,
-	    font=\huge\mdseries
-	]{chapter}
-	%-------------------------------------------------
-	\setkomafont{chapter}{\Large}
-	\setkomafont{chapterprefix}{\Huge}
-	%-------------------------------------------------
-	\renewcommand*\chapterformat{%
-	    \IfChapterUsesPrefixLine{
-	    	\textcolor{\colmainlight}{\chapappifchapterprefix{\ }}
-	    	\textcolor{\colmainlight}{\thechapter}
-	    }%
-	    {%
-	    	\textcolor{\colmain}{\Huge\thechapter}
-	    }%
-	}%
-	%
-	\renewcommand*\chapterlinesformat[3]{%
-	    \parbox[b]{\dimexpr\textwidth-1em\relax}{\raggedleft \Huge\textcolor{\colmain}{##3}}%
-	    \hfill
-	    \makebox[0pt][l]{##2}%
-	}
-	%
-	\renewcommand*{\chapterlineswithprefixformat}[3]{%
-		\raggedleft ##2%
-		\parbox[b]{\dimexpr\textwidth\relax}{\raggedleft \textcolor{\colmain}{##3}}%
-	}%
+%\RedeclareSectionCommand[beforeskip=1sp, font=\huge\mdseries]{chapter}
+%-------------------------------------------------
+\setkomafont{chapter}{\Huge}
+\setkomafont{chapterprefix}{\Huge}
+%-------------------------------------------------
+\renewcommand*\chapterformat{%
+	\IfChapterUsesPrefixLine{
+		\textcolor{\colmainlight}{\chapappifchapterprefix{\ }}
+	    \textcolor{\colmainlight}{\thechapter}}{%
+	    % else
+	    \textcolor{\colmain}{\Huge\thechapter}}}%
+%
+\renewcommand*\chapterlinesformat[3]{%
+	\raggedright\Huge##3%
+	\makebox[0pt][l]{##2}}
+%
+\renewcommand*{\chapterlineswithprefixformat}[3]{%
+	\textcolor{\colmain}{\rule{\textwidth}{.4pt}}
+	\raggedchapter ##2 % chapter
+	\raggedchapter ##3 % number
+	\textcolor{\colmain}{\rule{\textwidth}{.4pt}}}%
 }
 % ----------------------------------------------------------------------------------------
-% styleB: Inspired by #
+% styleB: Inspired by
 % https://tex.stackexchange.com/questions/330243/chapter-heading-formatting-with-scrreprt
 % ----------------------------------------------------------------------------------------
 \def\cheadstyle@styleB{
@@ -106,7 +100,13 @@
 % ----------------------------------------------------------------------------------------
 \def\fheadstyle@default{} % currently empty
 % ----------------------------------------------------------------------------------------
-% styleA: Inspired by 
+% styleA:
+% ----------------------------------------------------------------------------------------
+\def\fheadstyle@styleA{
+	
+}
+% ----------------------------------------------------------------------------------------
+% styleB: Inspired by 
 %https://tex.stackexchange.com/questions/261148/how-to-produce-a-headsepline-from-the-border-of-the-page-to-the-end-of-the-chapt
 % ----------------------------------------------------------------------------------------
 \def\fheadstyle@styleB{
@@ -124,6 +124,12 @@
 }
 \footerheaderstyle % execute
 % ########################################################################################
+%
+%
+%
+%
+%
+% ########################################################################################
 % Theorem and box appearence
 % Here we use the tcolorbox package to style theorems and boxes and add the 
 % cleveref packag for cross referencing
@@ -132,6 +138,7 @@
 \usepackage[nameinlink, capitalise]{cleveref}
 % ----------------------------------------------------------------------------------------	
 % default definition and theorem style
+% ----------------------------------------------------------------------------------------	
 \tcbset{
 	thmstyle_plain/.style={fonttitle=\bfseries\upshape, 
 	fontupper=\slshape,
@@ -146,16 +153,18 @@
 	size = minimal, % spacing of the box around the theorem
 	boxsep=0mm
 }}
+% ----------------------------------------------------------------------------------------	
 % This style is inspired by an answer given on stackexchange: 
 %https://tex.stackexchange.com/questions/369430/theorems-and-definitions-boxes-numbering-should-be-chapter-wise
 % ----------------------------------------------------------------------------------------	
-\tcbset{thmstyle_A/.style={
+\tcbset{
+	styleA/.style={
     reset,
     enhanced,
     breakable,
     sharp corners,
     attach boxed title to top left={
-      yshift=-4mm,
+      yshift=-3mm,
       yshifttext=-1mm,
       xshift=10mm
     },
@@ -175,7 +184,7 @@
 % ----------------------------------------------------------------------------------------
 % Kinda FAU corporate
 % ----------------------------------------------------------------------------------------
-\tcbset{thmstyle_B/.style={
+\tcbset{styleB/.style={
     boxrule=0pt,
     before skip=15pt,
     enhanced,
@@ -204,25 +213,44 @@
   terminator sign={.}
 }}
 % ----------------------------------------------------------------------------------------
+% If the theroem custom flag is not set we provide the full theorem environement
+% ----------------------------------------------------------------------------------------	
 \ifAP@theoremcustom %
 \else
 	\newtcbtheorem[number within=chapter]{theorem}{THEOREM}{\thmstyle, label type=theorem}{thm}
 	\newtcbtheorem[use counter from=theorem]{definition}{DEFINITION}{\thmstyle, label type=definition}{def}
 	\newtcbtheorem[use counter from=theorem]{corollary}{COROLLARY}{\thmstyle}{cor}
 	\newtcbtheorem[use counter from=theorem]{lemma}{LEMMA}{\thmstyle, label type=lemma}{lem}
-	\newtcbtheorem[use counter from=theorem]{remark}{REMARK}{thmstyle_plain, label type=remark}{rem}
-	\newtcbtheorem[use counter from=theorem]{example}{EXAMPLE}
-	{thmstyle_plain, fontupper=\upshape, label type=example}{ex}
+	\newtcbtheorem[use counter from=theorem]{remark}{REMARK}{\thmstyle, label type=remark}{rem}
+	\newtcbtheorem[use counter from=theorem]{example}{EXAMPLE}{\thmstyle, 
+		fontupper=\upshape, label type=example}{ex}
 \fi
 % ----------------------------------------------------------------------------------------
-% Emphasize stuff
-\newtcolorbox{emphBox}{
+% Other boxes
+% ----------------------------------------------------------------------------------------	
+\newtcolorbox{emphBox}{}
+\newtcolorbox{memo}{}
+\def\bstyle@default{}
+% ----------------------------------------------------------------------------------------	
+% All the boxings associated with styleA
+% ----------------------------------------------------------------------------------------	
+\def\bstyle@styleA{
+% Emphasize a text by lying some color underneath it
+\renewtcolorbox{emphBox}{
 	enhanced,
-	colback=\colmainlight,
-	colframe=\colmain,
+	colback=\colmainllight,
+	colframe=white, boxrule=0pt,
 	sharp corners,
-	size=small,
-    drop shadow southeast}
+	left=0.0pt,
+	right=0.0pt,
+	boxsep=0mm
+    % drop shadow southeast
+}
+% For important memos
+\renewtcolorbox[auto counter,number within=chapter]{memo}[2][]{
+	styleA, title= MEMO \thetcbcounter: ##2, ##1}
+}
+\boxingstyle % execute boxing
 % ########################################################################################
 
 

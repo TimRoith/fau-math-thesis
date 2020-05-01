@@ -4,7 +4,70 @@ This chapter is dedicated to the functionality of the template concerning its ac
 inherent purpose: mathematics. We use material from \cite{FineProp2015} to showcase 
 the possibilities.
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-\section{Page layout}
+\section{How to structure your thesis}
+On a very course level there are three parts you should divide your thesis into. 
+\begin{itemize}
+\item The front matter: the first few pages of your document should contain 
+\begin{itemize}
+\item a title page,
+\item a table of contents. 
+\end{itemize}
+Additionally you can include
+\begin{itemize}
+\item a list of figures, 
+\item a quick guide to the nomenclature, 
+\item an abstract, 
+\item an acknowledgement
+\item a preface.
+\end{itemize}
+Note, that you can add the preface as a chapter, which will not be numbered. 
+Never go below the chapter hierarchy in the front matter, i.e. do not use sections.
+\item The main matter: the actual content of your thesis goes here.
+\item The back matter: you will use this part of your thesis for 
+\begin{itemize}
+\item the bibliography,
+\item any kind of appendices.
+\end{itemize}
+Additionally if you want to employ an index, it will be displayed here.
+\end{itemize}
+\begin{emphBox}
+\lstinline|\frontmatter|\\
+\lstinline|\mainmatter|\\
+\lstinline|\backmatter|
+\end{emphBox}
+These commands structure the document as mentioned above. You may ask yourself why it is 
+necessary to use these commands at all, it should be enough for me know where which part 
+starts, right? In fact, there are some small difference between the three that do not 
+only affect your choice of content, but also the appearance of the pages. The command 
+\lstinline|\frontmatter| sets Roman numerals for pagination, that start at $0$. As hinted 
+above chapter numbering is also turned off.
+The command \lstinline|\mainmatter| will restart the numbering at $1$ with Arabic numerals. 
+A common but \emph{very} severe mistake would be to put page $1$ on an actual even sided page 
+(see \cref{sec:pagelay,sec:printing}). The provided commands prevent such behaviour.
+The command \lstinline|\backmatter| does pretty much the same as \lstinline|\frontmatter| 
+but \emph{keeps} the page numbering.
+\begin{example}{}{}
+The typical usage of the commands above is displayed below.
+\begin{lstlisting}
+\begin{document}
+%-----------------------------------------------------
+\frontmatter
+% here you will put stuff like the titlepage and the 
+% table of contents
+% ...
+%-----------------------------------------------------
+\mainmatter
+% put all your main contents here
+% ...
+%-----------------------------------------------------
+\backmatter
+% stuff like biblography and appendices 
+% ...
+\end{document}
+\end{lstlisting}	
+\end{example}
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\section{Page layout}\label{sec:pagelay}
 In order to write anything on a sheet of paper, you will need a basic understanding 
 of typography. While there exists a strong theory behind this whole topic, we will 
 not dive too deep and only give minimal introduction. One should however keep in mind that 
@@ -20,9 +83,9 @@ In order to display our thoughts and ideas we first need some kind of canvas, wh
 refer to as \textit{paper}. If you're writing a, thesis the size of this 
 should almost always be of a A4 or A5 format. Once you've chosen the paper size you 
 need to specify the area where you want to put stuff, which is refereed to as \textit{page}.
-\begin{emphBox}
+\begin{memo}{Page vs. paper}{}
 The paper does not necessarily coincide with the page.
-\end{emphBox}
+\end{memo}
 For simplicity---as hinted above---we will assume that the page is contained in the paper. 
 At first it might seem odd, as to why we differentiate be paper and page, but there is a 
 simple practical example that explains why it is not a good idea to think of the paper as 
@@ -40,22 +103,114 @@ be the dominant instance of the page,
 current chapter, section, etc.,
 \item the footer: a field below the body, which usually displays the pagination,
 \item two margins: two fields placed to the right and left of the body, of which one 
-actually displays marginal notes and the other is only placed for symmetrical reasons,
+actually displays marginal notes and the other is placed to preserve the symmetry,
 \end{itemize}
-see \cref{fig:play}. Having identified the main instances of our page, we now need to 
-define their positions and dimensions. In order to this in a way that is consistent with 
-the basic rules of typography, we employ the package \texttt{typearea}.
+see \cref{fig:play}. 
 %-----------------------------------------------------------------------------------------
 \begin{figure}
 \currentpage
+\setlayoutscale{.4}
 \printheadingsfalse
 \printparametersfalse
 \marginparswitchtrue
 \pagedesign
 \caption{The basic ingredients of our page, this graphic was created by the 
-\texttt{layouts} package} \label{fig:play}
-\end{figure}
+		\texttt{layouts} package.} \label{fig:play}
+\end{figure}
 %-----------------------------------------------------------------------------------------
+Having identified the main instances of our page, we now need to 
+define their positions and dimensions. In order to this in a way that is consistent with 
+the basic rules of typography, we employ the package \texttt{typearea}, which is the 
+natural choice for any document that bases off of \texttt{KOMA-script}. 
+In most cases the presets of this package will suffice for your purpose, if you want to 
+really get behind this topic we refer to the manual \cite{koma20}. Again it is important 
+to note that you can pass any options of our base class \texttt{scrbook} to the class 
+\texttt{\classname}. We proceed to present the most important options.
+\begin{emphBox}
+\lstinline[language={[LaTeX]TeX}]|\documentclass{..., oneside, ...}|\\
+\lstinline[language={[LaTeX]TeX}]|\documentclass{..., twoside, ...}|\\
+\lstinline[language={[LaTeX]TeX}]|\documentclass{..., twoside=semi, ...}|
+\end{emphBox}
+If you want the odd numbered pages to look like the even numbered pages you use the option 
+\lstinline[language={[LaTeX]TeX}]|oneside|. This is usually done for documents that are only 
+to be viewed in PDF format. You might argue that in a PDF viewer pages are arranged 
+vertically  and thus a odd page should be same as an even one. Another case where you 
+should use this option, is when you want your document to be printed onesided, i.e. only 
+the front side of the paper is used for printing and the backside is left blank. Using 
+this option will set the note margin to the right hand side and a \emph{equally spaced} blank 
+margin to the left. If you want to print out your
+document in a double paged format, i.e. both sides of the paper are used for printing it is
+necessary to use the option \lstinline[language={[LaTeX]TeX}]|twoside|. Just imagine an 
+opened book lying in front of you. The left page is referred to as even and the right side 
+as odd. The line where the paper of these two pages meet is called \emph{spine}. 
+There are some basic rules we note here:
+\begin{itemize}
+\item the odd and the even page are arranged axial symmetric with respect to the spine,
+\item the respective outer margin is used for notes, the inner one is blank, 
+\item the width of the two inner margins \emph{combined} defines the width of \emph{each} 
+of the outer margins, which means that for one page alone its inner margin is half the 
+size of the outer margin (see \cref{fig:twosided}).
+\end{itemize}
+%-----------------------------------------------------------------------------------------
+\begin{figure}
+\newlength{\pwlay}
+\setlength{\pwlay}{0.4375\textwidth}
+\drawaspread{\pwlay}{1.294}{1.618}{0.176}{1.037}{1.685}{0}
+\caption{Page arrangement for a twosided document, this graphic was created with the 
+		\texttt{layouts} package} \label{fig:twosided}
+\end{figure}
+%-----------------------------------------------------------------------------------------
+If you want equally spaced margins for but keep the twosided behaviour, use the option
+\lstinline[language={[LaTeX]TeX}]|twoside=semi|. Keep in mind that only one of this options 
+above can be used as they are mutually exclusive.
+\begin{emphBox}
+\lstinline[language={[LaTeX]TeX}]|\documentclass{..., BCOR=<w>mm, ...}|
+\end{emphBox}
+This option is important if you want to print out your document. If you're not that familiar 
+with the this process, you should read \cref{sec:printing} first. But lets assume you know 
+that is important to specify an area on the paper that is not used for the page (see above 
+Page vs. Paper). The option \lstinline[language={[LaTeX]TeX}]|BCOR| stands for 
+\emph{B}inding \emph{COR}rection and specifies the 
+width \lstinline[language={[LaTeX]TeX}]|<w>| of the strip that will disappear in the binding. 
+Together with the option \lstinline[language={[LaTeX]TeX}]|oneside| this strip is always 
+placed on the left hand side, with \lstinline[language={[LaTeX]TeX}]|twoside| it is placed next 
+to the receptive inner margin.
+\begin{emphBox}
+\lstinline[language={[LaTeX]TeX}]|\documentclass{..., PDF, ...}|
+\lstinline[language={[LaTeX]TeX}]|\documentclass{..., setPDF, ...}|
+\end{emphBox}
+The first option basically tells the class that it is to be viewed as a PDF document. 
+There are no direct effects on the page layout, we will discuss this option further below.
+The second one will preset the values mentioned above to the recommended setting for documents 
+that are only to be viewed electronically. Note that this options also has other effects 
+discussed below.
+\begin{emphBox}
+	\lstinline[language={[LaTeX]TeX}]|\documentclass{..., print, ...}|
+\lstinline[language={[LaTeX]TeX}]|\documentclass{..., setprint, ...}|
+\end{emphBox}
+The analogous options for documents that you want to print out, again the second one 
+will actually affect the page layout.
+\begin{memo}{Printing presets}{}
+The value \lstinline[language={[LaTeX]TeX}]|BCOR=15mm| is set by this option, but 
+you should actually set this value manually. Either you do binding yourself 
+and find the best value, or you contact the shop you want to print it at and ask 
+them. 
+\end{memo}
+\par
+\paragraph{Headers} Usually the header instance is used to display information about the 
+current chapter or the name of the thesis/book so that the reader is constantly reminded 
+what he is reading at the current moment. Naturally there are many possibilities to style 
+this area above the body and if you want to spend some time on that there will be more 
+than enough material available online.
+\begin{memo}{\texttt{KOMA} and \texttt{fancyhdr} or \texttt{titlesec}}{}
+The well known packages 
+\href{https://ctan.org/pkg/fancyhdr}{\texttt{fancyhdr}} and
+\href{https://ctan.org/pkg/titlesec}{\texttt{titlesec}} are the common choice 
+when dealing with header styling. However, we are using a \texttt{KOMA-script} 
+based class and should thus try to solve all our problems without \texttt{fancyhdr}. 
+In fact there are some minor conflicts when using  a combination of the above, which will 
+probably not affect you, but still, try to keep it \texttt{KOMA}!
+\end{memo} 
 
 
 
@@ -184,6 +339,8 @@ Here the reference look like this, \cref{en:second}.
 \kant
 \printinunitsof{pt}{\pagevalues}
 \pagediagram
-\section{C}
-This is pretty cool section.\newpage
-Do you like lewis huey and the news?
+\section{Printing}\label{sec:printing}
+As much as I didn't 
+want to believe it when writing my Bachelor's thesis, the process of printing is not just 
+some ... it is actual work and a crucial step towards your final goal which will affect 
+the overall quality!
