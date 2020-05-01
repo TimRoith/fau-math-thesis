@@ -10,7 +10,6 @@ allows students to create a good looking thesis. The class is designed
 for this specific purpose and follows the doctrine simplicity over 
 flexibility.
 # What does it not do?
-
 Some of the design decisions greatly decrease the overall flexibility 
 of the class. But in the end doesn't every line of code written do so?
 As mentioned above, the goal of this project is to provide a easy to use 
@@ -20,7 +19,6 @@ The most important point to note in this context is that we use a
 KOMA script as the base class. This is a fundamentally different approach 
 than most of the comparable packages took, it is motivated by above mentioned 
 doctrine.
---------------------------------------
 # How to use
 Theres currently a short documentation in the making. This whole poject 
 actually started as a LaTeX tutorial and we will try to provide a similiar 
