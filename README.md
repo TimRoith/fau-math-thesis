@@ -10,6 +10,7 @@ allows students to create a good looking thesis. The class is designed
 for this specific purpose and follows the doctrine simplicity over 
 flexibility.
 # What does it not do?
+
 Some of the design decisions greatly decrease the overall flexibility 
 of the class. But in the end doesn't every line of code written do so?
 As mentioned above, the goal of this project is to provide a easy to use 
