@@ -31,6 +31,5 @@ License is MIT. We are aware of more specific solutions for LaTeX documents,
 but it is not clear yet, which license will enable students to use this 
 template freely without losing the connection to its origin. If you have 
 experience with this topic, feel free to suggest a bettersolutions.
---------------------------------------
 # ToDo
 This section is currently not maintained.
