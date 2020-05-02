@@ -4,9 +4,41 @@ This chapter is dedicated to the functionality of the template concerning its ac
 inherent purpose: mathematics. We use material from \cite{FineProp2015} to showcase 
 the possibilities.
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-\section{How to structure your thesis}
-On a very course level there are three parts you should divide your thesis into. 
+\section{Some basics}
+\paragraph{Choosing a language}
+While the whole process 
+of writing a thesis can be exhausting, I would recommend the latter option. It is great 
+practice and will most certainly help you later on. Take me for an example, as you 
+probably have already guessed, I'm not a native English speaker, thus some sentences 
+are a bit clumsy. Nevertheless writing my thesis helped me improve my language skills 
+to the point that I'm now able to write documents that most people worldwide understand.
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\section{Formal requirements}\label{sec:reg}
+Your thesis must fulfil certain formal requirements laid down by the 
+\hyperlink{
+https://www.fau.eu/education/advice-and-services/examination-offices/
+examinations-office-faculty-of-sciences}{examinations office of the faculty of sciences}. 
+However to the best of my knowledge there are only very few---compared with other 
+universities---which are listed below.
 \begin{itemize}
+\item A title page: the layout is prescribed on the website of the examinations office, we 
+employed the original source code and hence fulfil this requirement (see \cref{sec:front}). 
+\item The usage of a permitted language. You will find a passage in 
+examination regulations which basically states, that your thesis has to be written in 
+German, except the examiner allows you to write it in English. It is also possible to 
+use a different language, but this has to discussed with your examiner \emph{and} 
+the examinations office.
+\item A declaration: this is a short statement where you ensure that the work is original 
+up to the references you explicitly mentioned\footnote{You should keep in mind that this 
+is serious stuff, it is necessary to reference \emph{all} your sources properly for the 
+thesis not to be interpreted as plagiarism.}. See \cref{par:decla} for more information.
+\end{itemize}
+More informations about the regularities for writing a thesis can be found on the official 
+website of the FAU (see \cite{FAUreg}).
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\section{How to structure your thesis}\label{sec:struc}
+On a very course level there are three parts you should divide your thesis into. 
+\begin{enumerate}
 \item The front matter: the first few pages of your document should contain 
 \begin{itemize}
 \item a title page,
@@ -26,10 +58,11 @@ Never go below the chapter hierarchy in the front matter, i.e. do not use sectio
 \item The back matter: you will use this part of your thesis for 
 \begin{itemize}
 \item the bibliography,
-\item any kind of appendices.
+\item any kind of appendices,
+\item the declaration.
 \end{itemize}
 Additionally if you want to employ an index, it will be displayed here.
-\end{itemize}
+\end{enumerate}
 \begin{emphBox}
 \lstinline|\frontmatter|\\
 \lstinline|\mainmatter|\\
@@ -39,7 +72,7 @@ These commands structure the document as mentioned above. You may ask yourself w
 necessary to use these commands at all, it should be enough for me know where which part 
 starts, right? In fact, there are some small difference between the three that do not 
 only affect your choice of content, but also the appearance of the pages. The command 
-\lstinline|\frontmatter| sets Roman numerals for pagination, that start at $0$. As hinted 
+\lstinline|\frontmatter| sets Roman numerals for pagination, that start at $i$. As hinted 
 above chapter numbering is also turned off.
 The command \lstinline|\mainmatter| will restart the numbering at $1$ with Arabic numerals. 
 A common but \emph{very} severe mistake would be to put page $1$ on an actual even sided page 
@@ -66,6 +99,42 @@ The typical usage of the commands above is displayed below.
 \end{document}
 \end{lstlisting}	
 \end{example}
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\section{The front matter}\label{sec:front}
+\paragraph{The titlepage} 
+Note that the title page always uses German for the prescribed text. However, it is not 
+really clear whether you need to translate the title, this can be a tricky question
+\footnote{My Bachelor thesis was written in English and it turned out that translating 
+the title would be rather weird, since it mostly consists of terms that don't have an 
+appropriate German analogue.}, discuss this with your examiner!
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\section{The back matter}\label{sec:back}
+\paragraph{Declaration}\label{par:decla} As mentioned in \cref{sec:reg} you need to include 
+a declaration where you ensure the originality of your work. This text is pre-formulated 
+and can be be found on the website, see \cite{FAUreg}.
+\begin{emphBox}
+\lstinline|\begin{declaration}...\end{declaration}|\\
+\lstinline|\declarationGer|
+\end{emphBox}
+The \lstinline|declaration| environment allows you to create the above mentioned 
+declaration. If the option \lstinline|twoside| is active it will always be placed on a odd 
+sided page, furthermore it clears a page, is \emph{not} included as a chapter and uses an 
+empty page style, i.e. no footers or headers are displayed. 
+As the text is pre-formulated already you can just use the command \lstinline|\declarationGer| 
+that will place this text inside the environment. 
+\begin{memo}{Language of formal text}
+Everything in your document that has a formal character, i.e. is a stated requirement of 
+\cref{sec:reg} should be written in German. This also applies to the declaration. 
+It is good practice not to use anything fancy like boxes and colours for these types of 
+pages, except of course it is required. 
+\end{memo}
+We will now showcase the effect of the command \lstinline|\declarationGer|.
+\declarationGer
+\paragraph{Bibliography} Brace yourself, this part is as important as difficult if you 
+haven't created a bibliography before. The basic task is simple: whenever we use concepts 
+and ideas that aren't our own we need to cite the source we got it from. Furthermore it 
+is often simpler to redirect the reader to certain literature instead of copying it all 
+to your thesis. 
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{Page layout}\label{sec:pagelay}
 In order to write anything on a sheet of paper, you will need a basic understanding 

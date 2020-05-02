@@ -171,8 +171,16 @@
 % Datetime commands
 % ----------------------------------------------------------------------------------------
 \usepackage[german, american]{babel}
-\usepackage[ngerman]{datetime}
-\newdateformat{gerformat}{\THEDAY{.}\hspace{3pt}\monthname[\THEMONTH] \THEYEAR}
+\usepackage{datetime2}
+% ----------------------------------------------------------------------------------------
+% Define the typical german style, ex: 02.Mai 2019
+% ----------------------------------------------------------------------------------------
+\DTMnewdatestyle{gerDatestyleA}{%
+	\renewcommand{\DTMdisplaydate}[4]{\number##3.\DTMgermanmonthname{##2} \number##1 }%
+	\renewcommand{\DTMDisplaydate}{\DTMdisplaydate}%
+}
+% Command for \today in the respective style
+\newcommand{\gertoday}{\DTMsetdatestyle{gerDatestyleA}\today}
 % ########################################################################################
 %
 %
@@ -208,7 +216,7 @@
 % ----------------------------------------------------------------------------------------
 % Some macros
 \def\subdate#1{\gdef\@subdate{#1}}
-\subdate{\gerformat\today} % The default value for the date is today in german style
+\subdate{\gertoday} % The default value for the date is today in german style
 \def\degree#1{\gdef\@degree{#1}} % for the degree you want to obtain
 \def\thesistype#1{\gdef\@thesistype{#1}} % for the degree you want to obtain
 \def\keywords#1{\gdef\@keywords{#1}}
@@ -310,7 +318,7 @@ von \textbf{\@author}
 			sortcites=false,% sort citations when multiple entries are passed to one cite command
 			doi=true,%
 			isbn=false,%
-			url=false,%
+			url=true,%
 			eprint=false,%
 			backend=biber %
 ]{biblatex}
@@ -371,6 +379,44 @@ von \textbf{\@author}
 %
 %
 % ########################################################################################
-% Defines the page layout. We now use the KOMA options instead of the geometry package.
+% We now use the KOMA options instead of the geometry package. It is just loaded for the 
+% showframe option. 
 % ----------------------------------------------------------------------------------------
 \usepackage[pass]{geometry} % This is just loaded for showframe
+% ########################################################################################
+%
+%
+%
+%
+%
+% ########################################################################################
+% Command for producing the declaration
+% ----------------------------------------------------------------------------------------
+\newenvironment{declaration}
+% before environment
+{\cleardoublepage
+\settowidth{\dotspace}{\@author and \dateAndLoc}
+\setlength{\dotspace}{\dimexpr(\textwidth - \dotspace - 2cm)\relax}
+\if@twocolumn\onecolumn\fi
+\begin{center} 
+\textbf{\Large Erkl\"arung}
+\end{center}
+\thispagestyle{empty}}{\clearpage}
+%
+\def\dateAndLoc{Erlangen, den \gertoday}
+\newlength{\dotspace}
+% ----------------------------------------------------------------------------------------
+% the predefind text from the examinatioons office
+% ----------------------------------------------------------------------------------------	
+\def\declarationGer{ 
+\begin{declaration}
+Hiermit versichere ich, dass ich die vorliegende Arbeit selbstst\"andig verfasst
+und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe,
+dass alle Stellen der Arbeit, die w\"ortlich oder sinngem\"aß aus anderen Quellen
+\"ubernommen wurden, als solche kenntlich gemacht sind und dass die Arbeit in
+gleicher oder \"ahnlicher Form noch keiner Pr\"ufungsbeh\"orde vorgelegt wurde.\\[1cm]
+% signature line
+\noindent\dateAndLoc\hspace{\dotspace}\dotfill\\[2pt]
+\strut\hfill\@author\hspace{1cm}	
+\end{declaration}}
+% ########################################################################################

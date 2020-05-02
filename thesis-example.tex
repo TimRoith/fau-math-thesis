@@ -5,13 +5,14 @@
 			   % BCOR=0mm, % offset for binding
 			   setPDF, % sets twosided=semi, BCOR=0, DIV=classic if not specified
 			   % showframe, % show the page layout
+			   customBiB,
 			   ]{fau-math-thesis}
 %
 % ########################################################################################
 % The following specifies the titlepage and can not be deleted
 % ----------------------------------------------------------------------------------------
 \title{Title of your thesis}
-\author{Your Name}
+\author{Your name}
 \thesistype{Bachelor-Arbeit}
 \degree{Bachelor of Science (B.Sc.)}
 \Referee{first=Prof. A, second=Dr. B, third= MSc. C} % Referees
@@ -76,5 +77,8 @@
                    heading = subbibliography]
 \printbibliography[type = article,
                    title = Articles,
+                   heading = subbibliography]
+\printbibliography[type = online,
+                   title = Online,
                    heading = subbibliography]
 \end{document}
