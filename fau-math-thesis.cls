@@ -150,15 +150,16 @@
 \define@key{color}{colmainlight}{\def\colmainlight{#1}}
 \define@key{color}{colmainllight}{\def\colmainllight{#1}}
 \define@key{color}{colmainlllight}{\def\colmainlllight{#1}}
+\define@key{color}{colcomp}{\def\colcomp{#1}}
 \setkeys{color}{colmain = black, colmainlight = white, colmainllight = white,%
-				colmainlllight = white}{}
+				colmainlllight = white, colcomp=black}{}
 %
 %
 \def\colors#1{
 \setkeys{color}{#1}
 \hypersetup{
 		urlcolor=\colmain,
-		citecolor=\colmain,
+		citecolor=\colcomp,
 		linkcolor=\colmain}
 }
 % ########################################################################################

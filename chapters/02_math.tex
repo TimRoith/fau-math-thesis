@@ -1,7 +1,7 @@
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \chapter{Writing a math thesis with \texttt{\classname}}\label{ch:math}
 This chapter is dedicated to the functionality of the template concerning its actual and 
-inherent purpose: mathematics. We use material from \cite{FineProp2015} to showcase 
+inherent purpose: mathematics. We use material from \cite{Evans15} to showcase 
 the possibilities.
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{Some basics}
@@ -15,8 +15,8 @@ to the point that I'm now able to write documents that most people worldwide und
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{Formal requirements}\label{sec:reg}
 Your thesis must fulfil certain formal requirements laid down by the 
-\hyperlink{
-https://www.fau.eu/education/advice-and-services/examination-offices/
+\hrefoot{
+https://www.fau.eu/education/advice-and-services/examination-offices/%
 examinations-office-faculty-of-sciences}{examinations office of the faculty of sciences}. 
 However to the best of my knowledge there are only very few---compared with other 
 universities---which are listed below.
@@ -134,7 +134,104 @@ We will now showcase the effect of the command \lstinline|\declarationGer|.
 haven't created a bibliography before. The basic task is simple: whenever we use concepts 
 and ideas that aren't our own we need to cite the source we got it from. Furthermore it 
 is often simpler to redirect the reader to certain literature instead of copying it all 
-to your thesis. 
+to your thesis. You have probably already observed this concept as it was also employed 
+for this document, but let us start with an example from the world of mathematics.
+\begin{example}{Citing}{cite}
+The concepts introduced by Kantorovich \cite{Kantorovich06} original published in 1942 are 
+the most important steps towards the optimal transport theory as we know it today. 
+The reader is referred to \cite{Villani03, Santa15} for an extensive study of the results 
+connected to these concepts. We will proceed to consider numerical 
+methods in optimal methods as presented in \cite[Ch. 6]{Santa15}.
+\begin{theorem}{Benamou-Brenier-Guittet \cite{Ben02}}{}
+A pretty neat convergence result\ldots
+\end{theorem}
+\begin{proof}
+We refer to the original source for a complete formal proof. It should however be noted 
+that one can find some very intuitive arguments in \cite[Ch. 6]{Santa15} that will 
+help to understand the proof better.
+\end{proof}
+\end{example}
+In \cref{ex:cite} we explored the most common style of citing references in the 
+mathematical world. This is often referred to as in-text citation via AMS plain. 
+This means that we incorporate the reference directly in the text, but instead of 
+placing the full reference text, we simply display a number that corresponds to the 
+respective source. The number-reference mapping will be displayed in the 
+bibliography. So how do we  do this in \LaTeX? By the help of the package 
+\hrefoot{https://ctan.org/pkg/biblatex}{\texttt{biblatex}}. The first step is to create 
+a file that stores the information of our references. In our case this will be the file 
+\texttt{bibliography/thesis-bibliography.bib}.
+\begin{example}{The .bib file}{bib}
+\begin{lstlisting}
+@article{Kantorovich06,
+	title={On the Translocation of Masses},
+	author={Kantorovich, Leonid V.},
+	journal={Journal of Mathematical Sciences},
+	year={2006},
+	volume={133},
+	pages={1381-1382}
+}
+@book{Evans15,
+	Author = {Lawrence Craig Evans},
+	title = {Measure Theory and Fine Properties of Functions, Revised Edition (Textbooks in Mathematics)},
+	description = {Measure Theory and Fine Properties of Functions, Revised Edition (Textbooks in Mathematics) (Book, 2015)},
+	publisher = {Chapman and Hall/CRC},
+	year = {2015},
+	month = {4},
+	isbn = {9781482242386},
+	url = {https://www.xarg.org/ref/a/1482242389/}
+}
+@online{FAUreg,
+	title = {Examination regulations of FAU},
+	url = {https://www.fau.de/fau/rechtsgrundlagen/pruefungsordnungen/naturwissenschaftliche-fakultaet},
+	urldate = {2020-05-02}
+}
+\end{lstlisting}	
+\end{example}
+You can or better you should open this file right now and get familiar with it. 
+You will find an excerpt in \cref{ex:bib}.
+\begin{emphBox}
+\lstinline|@article{...}|\\
+\lstinline|@book{...}|\\
+\lstinline|@online{...}|\\
+\lstinline|@misc{...}|
+\end{emphBox}
+These are the most important commands to create a new entry in your \texttt{.bib} file. 
+They work pretty similar, but are only to be used for each specific type of entry. 
+So you will use \lstinline|@article{...}| for papers and articles \lstinline|@book{...}| 
+for books, \lstinline|@online{...}| for websites and \lstinline|@misc{...}| for anything 
+else you can't really classify. If you feel the need to use different types, you will 
+find some additional ones in the package documentation of \texttt{biblatex}. 
+So what do we write inside the brackets? 
+The first argument is the label of the entry, this is only used for \LaTeX code and 
+will not be displayed in your document. You should, however, use a consistent naming 
+scheme here, since you will need this label in your code. For books and papers you 
+could use \lstinline|<author><last two digits of publishing year>|. 
+The other arguments are all put in via \lstinline|<arg>={<text>}| and are separated by 
+comma. Collecting these data is a tedious but many websites export in BibTeX format 
+and there are tools\footnote{https://www.doi2bib.org/ for example} that output 
+the data in wanted format. Furthermore instead of working directly in \texttt{.bib} 
+via a editor, you can employ software like jabref\footnote{https://www.jabref.org/}. 
+In order to obtain a good looking bibliography you should be as consistent with given 
+data as possible, i.e. entries of the same type should have the same information.
+\todo{Explain how to abbreviate names in entries.}
+\begin{emphBox}
+\lstinline|\cite{<label>}|
+\end{emphBox}
+This command allows you to create a reference to an entry in the bibliography, 
+see \cref{list:bib}
+\begin{lstbox}[label=list:bib]{Usinge the cite command}
+Basic usage: \cite{Evans15}.\\
+Using multiple entries: \cite{Evans15, Kantorovich06}.\\
+Adding information about pages or chapters: \cite[P. 87]{Evans15}.
+\end{lstbox}
+\todo{Explain the compiling process!}
+...\par
+\paragraph{Appendix}
+\kant
+\par
+\paragraph{Index}
+\kant
+\par
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{Page layout}\label{sec:pagelay}
 In order to write anything on a sheet of paper, you will need a basic understanding 
@@ -360,7 +457,7 @@ like this
 For enumerations we use the
 \href{https://ctan.org/pkg/enumitem}{\texttt{enumitem}} package, that provides vast 
 options for customization. Take a look at the following definition taken from 
-\cite{FineProp2015},
+\cite{Evans15},
 %-------------------------------------------------------------------------------
 \begin{definition}{}{measure}
 A mapping $\mu:2^{X}\rightarrow[0,\infty]$ is called a {\bfseries measure} on the nonempty

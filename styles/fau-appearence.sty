@@ -51,10 +51,10 @@
 	\makebox[0pt][l]{##2}}
 %
 \renewcommand*{\chapterlineswithprefixformat}[3]{%
-	\textcolor{\colmain}{\rule{\textwidth}{.4pt}}
+	\textcolor{\colmainlight}{\rule{\textwidth}{.4pt}}
 	\raggedchapter ##2 % chapter
 	\raggedchapter ##3 % number
-	\textcolor{\colmain}{\rule{\textwidth}{.4pt}}}%
+	\textcolor{\colmainlight}{\rule{\textwidth}{.4pt}}}%
 }
 % ----------------------------------------------------------------------------------------
 % styleB: Inspired by
@@ -247,7 +247,7 @@
     % drop shadow southeast
 }
 % For important memos
-\renewtcolorbox[auto counter,number within=chapter]{memo}[2][]{
+\renewtcolorbox[auto counter,use counter from=theorem]{memo}[2][]{
 	styleA, title= MEMO \thetcbcounter: ##2, ##1}
 }
 \boxingstyle % execute boxing

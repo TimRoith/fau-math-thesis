@@ -24,7 +24,7 @@
 % bibliography
 \addbibresource{bibliography/thesis-bibliography.bib}
 %
-
+\newcommand{\hrefoot}[2]{\href{#1}{#2}\footnote{#1}}
 %
 \usepackage{styles/fau-colors}
 \colorthemefaumath
@@ -46,11 +46,13 @@
     breaklines=true,
     basicstyle=\ttfamily,
     keywordstyle=\color{blue},
-    identifierstyle=\color{\colmain},
-    texcsstyle=*\color{\colmain},
+    identifierstyle=\color{black},
+    texcsstyle=*\color{\colcomp},
     commentstyle=\color{gray}
 }
-\newtcblisting[auto counter, number within=chapter]{lstbox}[2][]{
+\newtcblisting[auto counter, 
+			   use counter from=theorem, 
+			   crefname={Listing}{Listings}]{lstbox}[2][]{
 			   styleA, 
 			   title=LISTING \thetcbcounter: #2,#1, 
 			   listing options={language={[LaTeX]TeX}}}
