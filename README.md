@@ -26,6 +26,7 @@ one in the example file of this repo. Here we use a rather unconventional
 format, which will be a didactic introduction to the class.
 # Git Workflow
 We plan to incorporate a short explaination of how to properly employ forks and clones.
+# References
 # License
 License is MIT. We are aware of more specific solutions for LaTeX documents, 
 but it is not clear yet, which license will enable students to use this 
