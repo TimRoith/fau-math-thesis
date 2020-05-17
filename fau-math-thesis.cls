@@ -154,7 +154,6 @@
 \setkeys{color}{colmain = black, colmainlight = white, colmainllight = white,%
 				colmainlllight = white, colcomp=black}{}
 %
-%
 \def\colors#1{
 \setkeys{color}{#1}
 \hypersetup{
@@ -226,13 +225,33 @@
 \define@cmdkey{ref}{first}[]{}
 \define@cmdkey{ref}{second}[]{}
 \define@cmdkey{ref}{third}[]{}
-% ========= KEY DEFAULTS =========
-%\setkeys{ref}{}% Defaults
-\newcommand{\Referee}[1]{\setkeys{ref}{#1}}
+\newcommand{\Referee}[1]{
+	\setkeys{ref}{#1} 
+}
 \gdef\@Referee{%
-	Betreuer:& \cmdKV@ref@first
-	\key@ifundefined[cmdKV]{ref}{second}{}{\\ Betreuer:& \cmdKV@ref@second}
-	\key@ifundefined[cmdKV]{ref}{third}{}{\\ Betreuer:& \cmdKV@ref@third \\}
+	\key@ifundefined[cmdKV]{ref}{first}{}{Pr\"ufer:& \cmdKV@ref@first}
+	\key@ifundefined[cmdKV]{ref}{second}{}{\\ Pr\"ufer:& \cmdKV@ref@second}
+	\key@ifundefined[cmdKV]{ref}{third}{}{\\ Pr\"ufer:& \cmdKV@ref@third \\}
+}
+% Advisors
+\define@cmdkey{adv}{first}[]{}
+\define@cmdkey{adv}{second}[]{}
+\define@cmdkey{adv}{third}[]{}
+\newcommand{\Advisor}[1]{
+	\setkeys{adv}{#1} 
+}
+\gdef\@Advisor{%
+	\key@ifundefined[cmdKV]{ref}{first}{}{\\}
+	\key@ifundefined[cmdKV]{adv}{first}{}{Betreuer:& \cmdKV@adv@first}
+	\key@ifundefined[cmdKV]{adv}{second}{}{\\ Betreuer:& \cmdKV@adv@second}
+	\key@ifundefined[cmdKV]{adv}{third}{}{\\ Betreuer:& \cmdKV@adv@third \\}
+}
+% Command that places supervisor stuff
+\newcommand{\supervisors}{
+\begin{tabular}{r l}
+	\@Referee
+	\@Advisor
+\end{tabular}
 }
 % ----------------------------------------------------------------------------------------
 \renewcommand{\maketitle}{
@@ -255,13 +274,9 @@ am Department Mathematik der\\ Friedrich-Alexander-Universit\"at
 Erlangen-N\"urnberg\\[1cm]
 vorgelegt am \textbf{\@subdate} \\[3mm]
 von \textbf{\@author}
-%  \vspace{2.5cm}
-%  \vspace{3cm}
 \vfill
 \normalsize
-\begin{tabular}{r l}
-\@Referee
-\end{tabular}
+\supervisors
 \end{center}
 %
 \begin{minipage}{0.36\textwidth}

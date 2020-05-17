@@ -4,11 +4,15 @@
 % ########################################################################################
 % Options and bools
 % ----------------------------------------------------------------------------------------
-\newif\ifAP@theoremcustom\AP@theoremcustomfalse
-\DeclareOptionX{thmcust}{\AP@theoremcustomtrue}
-
+%
+% ----------------------------------------------------------------------------------------
+% Theorem styles
 \def\thmstyle{thmstyle_plain}
-\DeclareOptionX{thmboxing}{\def\thmstyle{#1}}
+\def\thmsstyle{\tstyle@default}
+\DeclareOptionX{thmboxing}{
+	\def\thmstyle{#1}
+	\def\thmsstyle{\csname tstyle@#1\endcsname}
+}
 %
 \def\boxingstyle{\bstyle@default}
 \DeclareOptionX{boxingstyle}{\def\boxingstyle{\csname bstyle@#1\endcsname}}
@@ -215,16 +219,23 @@
 % ----------------------------------------------------------------------------------------
 % If the theroem custom flag is not set we provide the full theorem environement
 % ----------------------------------------------------------------------------------------	
-\ifAP@theoremcustom %
-\else
-	\newtcbtheorem[number within=chapter]{theorem}{THEOREM}{\thmstyle, label type=theorem}{thm}
-	\newtcbtheorem[use counter from=theorem]{definition}{DEFINITION}{\thmstyle, label type=definition}{def}
-	\newtcbtheorem[use counter from=theorem]{corollary}{COROLLARY}{\thmstyle}{cor}
-	\newtcbtheorem[use counter from=theorem]{lemma}{LEMMA}{\thmstyle, label type=lemma}{lem}
-	\newtcbtheorem[use counter from=theorem]{remark}{REMARK}{\thmstyle, label type=remark}{rem}
-	\newtcbtheorem[use counter from=theorem]{example}{EXAMPLE}{\thmstyle, 
-		fontupper=\upshape, label type=example}{ex}
-\fi
+\def\tstyle@default{}
+% ----------------------------------------------------------------------------------------	
+\def\tstyle@styleA{
+\newtcbtheorem[number within=chapter]{theorem}{THEOREM}{\thmstyle, label type=theorem}{thm}
+\newtcbtheorem[use counter from=theorem]{definition}{DEFINITION}{\thmstyle, label type=definition}{def}
+\newtcbtheorem[use counter from=theorem]{corollary}{COROLLARY}{\thmstyle, label type=corollary}{cor}
+\newtcbtheorem[use counter from=theorem]{lemma}{LEMMA}{\thmstyle, label type=lemma}{lem}
+\newtcbtheorem[use counter from=theorem]{remark}{REMARK}{\thmstyle, label type=remark}{rem}
+\newtcbtheorem[use counter from=theorem]{example}{EXAMPLE}{\thmstyle, 
+	fontupper=\upshape, label type=example}{ex}		
+}
+% ----------------------------------------------------------------------------------------	
+\def\tstyle@styleB{\tstyle@styleA}
+% ----------------------------------------------------------------------------------------	
+\def\tstyle@styleC{\tstyle@styleA}
+% ----------------------------------------------------------------------------------------	
+\thmsstyle % Excecute
 % ----------------------------------------------------------------------------------------
 % Other boxes
 % ----------------------------------------------------------------------------------------	
