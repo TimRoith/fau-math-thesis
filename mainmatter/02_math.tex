@@ -1,11 +1,12 @@
-%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \chapter{Writing a math thesis with \texttt{\classname}}\label{ch:math}
 This chapter is dedicated to the functionality of the template concerning its actual and 
 inherent purpose: mathematics. We use material from \cite{Evans15} to showcase 
 the possibilities.
-%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{Some basics}
-\paragraph{Choosing a language}
+% ........................................................................................
+\subsection{Choosing a language}\index{Language}
 While the whole process 
 of writing a thesis can be exhausting, I would recommend the latter option. It is great 
 practice and will most certainly help you later on. Take me for an example, as you 
@@ -36,7 +37,7 @@ thesis not to be interpreted as plagiarism.}. See \cref{par:decla} for more info
 More informations about the regularities for writing a thesis can be found on the official 
 website of the FAU (see \cite{FAUreg}).
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-\section{How to structure your thesis}\label{sec:struc}
+\section{Course structure of your thesis}\label{sec:struc}
 On a very course level there are three parts you should divide your thesis into. 
 \begin{enumerate}
 \item The front matter: the first few pages of your document should contain 
@@ -99,17 +100,82 @@ The typical usage of the commands above is displayed below.
 \end{document}
 \end{lstlisting}	
 \end{example}
-%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{The front matter}\label{sec:front}
-\paragraph{The titlepage} 
-Note that the title page always uses German for the prescribed text. However, it is not 
+% ........................................................................................
+\subsection{The titlepage} 
+Note that the title page\index{Title page} always uses German for the prescribed text. 
+However, it is not 
 really clear whether you need to translate the title, this can be a tricky question
 \footnote{My Bachelor thesis was written in English and it turned out that translating 
 the title would be rather weird, since it mostly consists of terms that don't have an 
 appropriate German analogue.}, discuss this with your examiner!
+\begin{emphBox}
+\lstinline|\maketitle|
+\end{emphBox}
+This command prints out the title page, it is most likely the first thing you want to put 
+beneath the \lstinline|\frontmatter| command. The style of this page is predefined and 
+should not be changed. Usually the math department and especially the examinations 
+office is not overly strict concerning design questions, so arranging the required 
+info in a reasonable fashion would most likely suffice, however, it is strongly 
+recommended to just use the template. Of course you need to put in your own data, this 
+done via the following commands.
+\begin{emphBox}
+\lstinline|\title{...}|\\
+\lstinline|\author{...}|\\
+\lstinline|\thesistype{...}|\\
+\lstinline|\degree{...}|\\
+\lstinline|\Referee{...}|\\
+\lstinline|\Advisor{...}|\\
+\end{emphBox}
+See the below example for usage details.
+% ----------------------------------------------------------------------------------------
+\begin{example}{Title page info}{}
+\begin{lstlisting}
+\title{Title of your thesis}
+\author{Your name}
+\thesistype{Bachelor-Arbeit}
+\degree{Bachelor of Science (B.Sc.)}
+\Referee{first=Prof. A, second=Dr. B} % Referees
+\Advisor{first=M.Sc. C}
+\end{lstlisting}
+\end{example}
+% ----------------------------------------------------------------------------------------
+% ........................................................................................
+\subsection{Acknowledgement and dedication}
+If you feel the need to thank or mention anyone or anything specifically you can do this 
+via an Acknowledgement or a dedication, it is important to note that they are not the same!
+\begin{emphBox}
+\lstinline|\dedicationtext{...}|
+\lstinline|\printdedication|	
+\end{emphBox}
+If you want to thank your family, friends, lovers or cats for their support, the dedication 
+is the place to put it. Therefore, you set the text via the command 
+\lstinline|\dedicationtext{...}|, i.e. instead of \ldots put all the heart warming poems 
+you thought of between the brackets, the text is then stored internally, the command 
+\lstinline|\printdedication| will print it out, thus the order in which you use these 
+commands is crucial, first declare the text then print it. To be more specific the latter 
+actually sets up a whole page with an empty page style and no title. This is stylistic 
+choice to mimic the special role of this page in your thesis. If you are not happy with the 
+style of the dedication you can simply create one yourself and not use these commands at all.
+\begin{emphBox}
+\lstinline|\acknowledgementtext{...}|
+\lstinline|\printacknowledgement|	
+\end{emphBox}
+An acknowledgement is more formal than a dedication. Here you want to thank professors, 
+mentors or colleagues that helped you write your thesis. You can also mention certain 
+tools you used or anybody you don't even know personally that made your life easier 
+on a scientific level. For example, this document here could acknowledge 
+Donald E. Knuth \footnote{An American computer scientist and mathematician, best known 
+as the creator of \TeX, one of the most influential and brilliant scientist in recent 
+times, see for example \texttt{https://en.wikipedia.org/wiki/Donald\_Knuth.}}
+and \LaTeX in general.  
+The usage of these commands are analogous to the ones for the dedication. However, since 
+an acknowledgement is more formal, the page has title and number.  
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{The back matter}\label{sec:back}
-\paragraph{Declaration}\label{par:decla} As mentioned in \cref{sec:reg} you need to include 
+% ........................................................................................
+\subsection{Declaration}\label{par:decla} As mentioned in \cref{sec:reg} you need to include 
 a declaration where you ensure the originality of your work. This text is pre-formulated 
 and can be be found on the website, see \cite{FAUreg}.
 \begin{emphBox}
@@ -130,7 +196,8 @@ pages, except of course it is required.
 \end{memo}
 We will now showcase the effect of the command \lstinline|\declarationGer|.
 \declarationGer
-\paragraph{Bibliography} Brace yourself, this part is as important as difficult if you 
+% ........................................................................................
+\subsection{Bibliography} Brace yourself, this part is as important as difficult if you 
 haven't created a bibliography before. The basic task is simple: whenever we use concepts 
 and ideas that aren't our own we need to cite the source we got it from. Furthermore it 
 is often simpler to redirect the reader to certain literature instead of copying it all 
@@ -210,7 +277,7 @@ The other arguments are all put in via \lstinline|<arg>={<text>}| and are separa
 comma. Collecting these data is a tedious but many websites export in BibTeX format 
 and there are tools\footnote{https://www.doi2bib.org/ for example} that output 
 the data in wanted format. Furthermore instead of working directly in \texttt{.bib} 
-via a editor, you can employ software like jabref\footnote{https://www.jabref.org/}. 
+via a editor, you can employ software like \texttt{jabref}\footnote{https://www.jabref.org/}. 
 In order to obtain a good looking bibliography you should be as consistent with given 
 data as possible, i.e. entries of the same type should have the same information.
 \todo{Explain how to abbreviate names in entries.}
@@ -280,7 +347,7 @@ see \cref{fig:play}.
 \printparametersfalse
 \marginparswitchtrue
 \pagedesign
-\caption{The basic ingredients of our page, this graphic was created by the 
+\caption[Page arrangement]{The basic ingredients of our page, this graphic was created by the 
 		\texttt{layouts} package.} \label{fig:play}
 \end{figure}
 %-----------------------------------------------------------------------------------------
@@ -322,7 +389,7 @@ size of the outer margin (see \cref{fig:twosided}).
 \newlength{\pwlay}
 \setlength{\pwlay}{0.4375\textwidth}
 \drawaspread{\pwlay}{1.294}{1.618}{0.176}{1.037}{1.685}{0}
-\caption{Page arrangement for a twosided document, this graphic was created with the 
+\caption[Twosided margin spacing]{Page arrangement for a twosided document, this graphic was created with the 
 		\texttt{layouts} package} \label{fig:twosided}
 \end{figure}
 %-----------------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 			   % BCOR=0mm, % offset for binding
 			   setPDF, % sets twosided=semi, BCOR=0, DIV=classic if not specified
 			   % showframe, % show the page layout
-			   customBiB,
+			   bibstyle=styleB,
 			   ]{fau-math-thesis}
 %
 % ########################################################################################
@@ -24,7 +24,7 @@
 \setpdfinfo % For additional information in the pdf file
 % ########################################################################################
 % bibliography
-\addbibresource{bibliography/thesis-bibliography.bib}
+\addbibresource{backmatter/thesis-bibliography.bib}
 %
 \newcommand{\hrefoot}[2]{\href{#1}{#2}\footnote{#1}}
 %
@@ -35,7 +35,7 @@
 			boxingstyle=styleA,
 			chapterheader=styleA, 
 			footerheader=styleA]{styles/fau-appearence}
-\usepackage{styles/CommandSpec}
+\usepackage{styles/fau-symbols}
 
 \usepackage{kantlipsum}
 \usepackage{layouts}
@@ -59,30 +59,35 @@
 			   title=LISTING \thetcbcounter: #2,#1, 
 			   listing options={language={[LaTeX]TeX}}}
 
+\dedicationtext{
+	Für Andreas Goldberger,\\
+	ohne ihn hätte ich nie die Kraft gefunden heute Morgen aufzustehen.
+}
+\acknowledgementtext{
+	I would like to thank my supervisors for helping me finish this thesis.
+}
+
 
 \begin{document}
 %-------------------------------------------------
 \frontmatter
 %-------------------------------------------------
 \maketitle
+\printdedication
+\printacknowledgement
 \tableofcontents
-\newpage
+\listoffigures
+\printnomenclature
 %-------------------------------------------------
 \mainmatter
 %-------------------------------------------------
-\input{chapters/00_dedication_abstract.tex}
-\input{chapters/01_introduction.tex}
-\input{chapters/02_math.tex}
+\input{mainmatter/00_dedication_abstract.tex}
+\input{mainmatter/01_introduction.tex}
+\input{mainmatter/02_math.tex}
 %-------------------------------------------------
 \backmatter
+\input{backmatter/thesis-printbib.tex}
+\printindex
 %-------------------------------------------------
-\printbibliography[type = book,
-                   title = Books,
-                   heading = subbibliography]
-\printbibliography[type = article,
-                   title = Articles,
-                   heading = subbibliography]
-\printbibliography[type = online,
-                   title = Online,
-                   heading = subbibliography]
+
 \end{document}

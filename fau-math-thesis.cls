@@ -18,11 +18,11 @@
 \usepackage{xkeyval} % Should be loaded here in case we want to define xkey Options
 % ------------------------------------------------
 % Bibliography, the options are currently very limited, user can either specify the 
-% the bib stuff himself by using ths option or use the spec from the bib section 
+% the bib stuff himself by using the default option or use the spec from the bib section 
 % down below.
 % ----------------------------------------------------------------------------------------
-\newif\ifTH@customBib\TH@customBibfalse
-\DeclareOptionX{customBib}{\TH@customBibtrue}
+\def\bibstyle{\biblstyle@default}
+\DeclareOptionX{bibstyle}{\def\bibstyle{\csname biblstyle@#1\endcsname}}
 % ----------------------------------------------------------------------------------------
 % Options for the page layout within KOMA
 \newif\ifFAU@setBCOR\FAU@setBCORfalse
@@ -188,30 +188,6 @@
 %
 %
 % ########################################################################################
-% Some usful stuff we'll need all the time
-% ----------------------------------------------------------------------------------------
-\newenvironment{singlepage}{%
-	\@restonecolfalse
-	\if@twocolumn
-		\@restonecoltrue\onecolumn
-	\else
-		\if@openright
-			\cleardoublepage
-		\else
-			\clearpage
-		\fi
-	\fi}%
-{\if@restonecol
-	\twocolumn
-\else\newpage\thispagestyle{empty}
-\fi}
-% ########################################################################################
-%
-%
-%
-%
-%
-% ########################################################################################
 % Titelpage
 % ----------------------------------------------------------------------------------------
 % Some macros
@@ -255,7 +231,7 @@
 }
 % ----------------------------------------------------------------------------------------
 \renewcommand{\maketitle}{
-\begin{singlepage}
+\begin{titlepage}
 \thispagestyle{empty}
 \textsf{
 \begin{center}
@@ -288,7 +264,30 @@ von \textbf{\@author}
 \includegraphics[width=\textwidth]{atelier/logo/DepMathLogo} \\[3mm]
 \end{minipage}
 }
-\end{singlepage}
+\end{titlepage}
+}
+% ########################################################################################
+% Dedication
+% ----------------------------------------------------------------------------------------
+\newcommand{\dedicationtext}[1]{
+\newcommand{\printdedication}{
+\begin{titlepage}
+\begin{center}
+#1
+\end{center}
+\end{titlepage}
+}
+}
+% ----------------------------------------------------------------------------------------
+% Acknowledgement
+% ----------------------------------------------------------------------------------------
+\newcommand{\acknowledgementtext}[1]{
+\newcommand{\printacknowledgement}{
+\begin{center}
+\textbf{\Large Acknowledgement}
+\end{center}
+#1
+}
 }
 % ########################################################################################
 %
@@ -318,33 +317,41 @@ von \textbf{\@author}
 % ########################################################################################
 % Bibliography
 % ----------------------------------------------------------------------------------------
-\ifTH@customBib %
-\else
 \usepackage{csquotes}
-\usepackage[style=numeric-comp,%
+% ----------------------------------------------------------------------------------------
+\def\biblstyle@default{}
+% ----------------------------------------------------------------------------------------
+\def\biblstyle@styleA{
+	\usepackage[style=numeric-comp,%
 			defernumbers=true,
 			useprefix=true,%
 			giveninits=true,%
 			hyperref=true,%
-			autocite=inline,
-			maxcitenames=2,%
-			maxbibnames=20,%
 			uniquename=init,%
 			sorting = none,
 			sortcites=false,% sort citations when multiple entries are passed to one cite command
 			doi=true,%
 			isbn=false,%
 			url=true,%
-			eprint=false,%
 			backend=biber %
-]{biblatex}
-\fi
-% ########################################################################################
-%
-%
-%
-%
-%
+	]{biblatex}
+}
+\def\biblstyle@styleB{
+	\usepackage[style=alphabetic,%
+		defernumbers=true,
+		useprefix=true,%
+		giveninits=true,%
+		hyperref=true,%
+		uniquename=init,%
+		sorting = none,
+		sortcites=false,% sort citations when multiple entries are passed to one cite command
+		doi=true,%
+		isbn=false,%
+		url=true,%
+		backend=biber %
+		]{biblatex}	
+}
+\bibstyle
 % ########################################################################################
 %
 %
@@ -377,11 +384,13 @@ von \textbf{\@author}
     breaklinks=true,
     linktocpage
 }
-\def\setpdfinfo{\hypersetup{pdfinfo={
-			Title={\@title},
-			Author={\@author},
-			Subject={\@thesistype},
-			Keywords={\@keywords}}}}
+\def\setpdfinfo{
+	\hypersetup{pdfinfo={
+		Title={\@title},
+		Author={\@author},
+		Subject={\@thesistype},
+		Keywords={\@keywords}}}
+}
 % ########################################################################################
 % Misc
 % ----------------------------------------------------------------------------------------
@@ -395,7 +404,7 @@ von \textbf{\@author}
 %
 %
 % ########################################################################################
-% We now use the KOMA options instead of the geometry package. It is just loaded for the 
+% We use KOMA options instead of the geometry package. It is just loaded for the 
 % showframe option. 
 % ----------------------------------------------------------------------------------------
 \usepackage[pass]{geometry} % This is just loaded for showframe

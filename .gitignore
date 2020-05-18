@@ -17,3 +17,10 @@
 *.blg
 *.listing
 *.toc
+*.lof
+*.nlo
+*.nls
+*.ind
+*.idx
+*.els
+
