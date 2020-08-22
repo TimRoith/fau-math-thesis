@@ -382,7 +382,7 @@ von \textbf{\@author}
     bookmarksopen=true,
     bookmarksnumbered=true,
     breaklinks=true,
-    linktocpage
+    %linktocpage
 }
 \def\setpdfinfo{
 	\hypersetup{pdfinfo={

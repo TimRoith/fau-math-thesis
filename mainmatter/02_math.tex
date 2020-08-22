@@ -155,11 +155,12 @@ is the place to put it. Therefore, you set the text via the command
 you thought of between the brackets, the text is then stored internally, the command 
 \lstinline|\printdedication| will print it out, thus the order in which you use these 
 commands is crucial, first declare the text then print it. To be more specific the latter 
-actually sets up a whole page with an empty page style and no title. This is stylistic 
+actually sets up a whole page with an empty page style and no title, the text is centred. 
+This is stylistic 
 choice to mimic the special role of this page in your thesis. If you are not happy with the 
 style of the dedication you can simply create one yourself and not use these commands at all.
 \begin{emphBox}
-\lstinline|\acknowledgementtext{...}|
+\lstinline|\acknowledgementtext{...}|\\
 \lstinline|\printacknowledgement|	
 \end{emphBox}
 An acknowledgement is more formal than a dedication. Here you want to thank professors, 
@@ -169,9 +170,23 @@ on a scientific level. For example, this document here could acknowledge
 Donald E. Knuth \footnote{An American computer scientist and mathematician, best known 
 as the creator of \TeX, one of the most influential and brilliant scientist in recent 
 times, see for example \texttt{https://en.wikipedia.org/wiki/Donald\_Knuth.}}
-and \LaTeX in general.  
-The usage of these commands are analogous to the ones for the dedication. However, since 
-an acknowledgement is more formal, the page has title and number.  
+and \LaTeX in general. If you are sponsored (for example via a scholarship or 
+similar financial aids) you should absolutely acknowledge this, not only because you're 
+grateful for the money the sent you but also because it is good advertisement for 
+yourself, provided that anyone will ever take a look into your thesis, but that is a 
+different topic.
+The usage of the commands are analogous to the ones for the dedication. However, since 
+an acknowledgement is more formal, the page has title and number.
+% ........................................................................................
+\subsection{Table of contents and list of figures}
+It is not entirely clear whether or not a table of contents\index{Table of contents} is 
+formally required, but I strongly advise you to put one in your thesis.
+\begin{emphBox}
+\lstinline|\tableofcontents|\\
+\end{emphBox}
+This command will automatically print the table of contents on a new page. But how do we 
+specify the elements of this table or better how does \LaTeX know what to put in it?
+
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{The back matter}\label{sec:back}
 % ........................................................................................
