@@ -44,13 +44,12 @@ If you know what you are doing you can of course just fork the repository.
 ## Working with fau-math-thesis
 Theres currently a short documentation in the making. This whole poject 
 actually started as a LaTeX tutorial and we will try to provide a similiar 
-one in the example file of this repo. Here we use a rather unconventional 
+one in a different repo. Here we use a rather unconventional 
 format, which will be a didactic introduction to the class.
 # References
 # License
 License is MIT. We are aware of more specific solutions for LaTeX documents, 
-but it is not clear yet, which license will enable students to use this 
-template freely without losing the connection to its origin. If you have 
-experience with this topic, feel free to suggest a bettersolutions.
+but not o their benefits. If you have experience with this topic, 
+feel free to suggest a better solution.
 # ToDo
 This section is currently not maintained.
