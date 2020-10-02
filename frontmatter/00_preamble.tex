@@ -44,32 +44,4 @@
 % ----------------------------------------------------------------------------------------
 %
 \usepackage{kantlipsum}
-\usepackage{tabularx}
-\usepackage{graphicx}
-\usepackage{todonotes}
-\usepackage{subcaption}
 \usepackage[totoc]{idxlayout}
-\usepackage{printlen}
-%
-\tcbuselibrary{listings}
-\lstset
-{	language={[LaTeX]TeX},
-    breaklines=true,
-    basicstyle=\ttfamily,
-    keywordstyle=\color{blue},
-    identifierstyle=\color{black},
-    texcsstyle=*\color{\colcomp},
-    commentstyle=\color{gray}
-}
-\newtcblisting[auto counter, 
-			   use counter from=theorem, 
-			   crefname={Listing}{Listings}]{lstbox}[2][]{
-			   styleA, 
-			   title=LISTING \thetcbcounter: #2,#1, 
-			   listing options={language={[LaTeX]TeX}}}
-%	   
-\newcommand{\hrefoot}[2]{\href{#1}{#2}\footnote{#1}}
-\newcommand{\colorcite}[3]{{\hypersetup{citecolor=#1}{\cite[#2]{#3}}}}
-\newcommand{\indemph}[1]{\index{#1}\emph{#1}} % index emphazize
-%
-\setlength{\nomlabelwidth}{1.5cm}
