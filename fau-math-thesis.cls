@@ -2,13 +2,14 @@
 % Class specification
 % ----------------------------------------------------------------------------------------
 \newcommand{\classname}{fau-math-thesis}
-\newcommand{\fileversion}{0.1}
-\newcommand{\filedate}{02/05/2020}
-\newcommand{\cfileauthor}{Tim Roith}
+\newcommand{\fileversion}{1.1}
+\newcommand{\filedate}{2020/10/02}
+\newcommand{\cfileauthor}{Tim C.O. Roith}
 \def\baseclass{scrbook}
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{fau-math-thesis}[\filedate A class file for a FAU math thesis, provided by]
+\ProvidesClass{\classname}[\filedate\space Latex class for a FAU math thesis 
+							provided by Tim C.O. Roith, v\fileversion.]
 % ########################################################################################
 % Options and bools
 % ----------------------------------------------------------------------------------------
@@ -16,8 +17,9 @@
 % used further below
 % ----------------------------------------------------------------------------------------
 \usepackage{xkeyval} % Should be loaded here in case we want to define xkey Options
-% ------------------------------------------------
-% Bibliography, the options are currently very limited, user can either specify the 
+% ----------------------------------------------------------------------------------------
+% Bibliography
+% the options are currently very limited, user can either specify the 
 % the bib stuff himself by using the default option or use the spec from the bib section 
 % down below.
 % ----------------------------------------------------------------------------------------
@@ -48,8 +50,8 @@
 	\PassOptionsToClass{\CurrentOption}{\baseclass}
 }%
 % ----------------------------------------------------------------------------------------
-% If the page layout is not set by options and the PDF or print option is set we now specify
-% the page layout by means of the KOMA script.
+% If the page layout is not set by options and the PDF or print option is set we now 
+% specify the page layout by means of the KOMA script.
 % ----------------------------------------------------------------------------------------
 \newif\ifTH@PDF\TH@PDFfalse % PDF Option, a document for PDF viewers
 \newif\ifFAU@print\FAU@printfalse % print Option, a document for pinting
@@ -122,6 +124,7 @@
 % ----------------------------------------------------------------------------------------
 % We can now load our baseclass
 \LoadClass{\baseclass}
+\usepackage{scrhack}
 % ########################################################################################
 %
 %
@@ -194,6 +197,7 @@
 \def\subdate#1{\gdef\@subdate{#1}}
 \subdate{\gertoday} % The default value for the date is today in german style
 \def\degree#1{\gdef\@degree{#1}} % for the degree you want to obtain
+\gdef\degprog#1{\gdef\@degprog{#1}} % Degree Program
 \def\thesistype#1{\gdef\@thesistype{#1}} % for the degree you want to obtain
 \def\keywords#1{\gdef\@keywords{#1}}
 % ----------------------------------------------------------------------------------------
@@ -242,9 +246,7 @@
 \Large zur Erlangung des Grades\\[5mm]
 \textbf{\@degree \\[5mm]
 im Studiengang
-Mathematik\\[5mm]
-%% Technomathematik\\[5mm]
-%% Wirtschaftsmathematik\\[5mm]
+\@degprog\\[5mm]
 }
 am Department Mathematik der\\ Friedrich-Alexander-Universit\"at
 Erlangen-N\"urnberg\\[1cm]
@@ -304,8 +306,8 @@ von \textbf{\@author}
 %\setcounter{secnumdepth}{2}
 %% The level that shows up in the ToC:
 %\setcounter{tocdepth}{2}
-
-
+%
+%
 %\renewcommand{\chapterheadstartvskip}{\vspace*{40pt}}
 %\renewcommand{\chapterheadendvskip}{\vspace{30pt}}
 % ########################################################################################
@@ -332,7 +334,7 @@ von \textbf{\@author}
 			sortcites=false,% sort citations when multiple entries are passed to one cite command
 			doi=true,%
 			isbn=false,%
-			url=true,%
+			url=false,%
 			backend=biber %
 	]{biblatex}
 }
@@ -347,11 +349,14 @@ von \textbf{\@author}
 		sortcites=false,% sort citations when multiple entries are passed to one cite command
 		doi=true,%
 		isbn=false,%
-		url=true,%
+		url=false,%
 		backend=biber %
 		]{biblatex}	
 }
 \bibstyle
+% url breaks
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
 % ########################################################################################
 %
 %
@@ -379,10 +384,12 @@ von \textbf{\@author}
     pdfstartview=FitV,
     pdftoolbar=true,
     pdfmenubar=true,
+    pdfencoding=auto, % Allows symbols in toc and content oveview
+    psdextra, % same as above
     bookmarksopen=true,
     bookmarksnumbered=true,
     breaklinks=true,
-    %linktocpage
+    linktocpage=true
 }
 \def\setpdfinfo{
 	\hypersetup{pdfinfo={

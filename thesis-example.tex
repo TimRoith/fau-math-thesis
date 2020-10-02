@@ -1,4 +1,5 @@
 \documentclass[fontsize=11pt, % size of the font
+			   paper=a4,
 			   chapterprefix=true,
 			   % oneside, % other option: oneside
 			   % chapterprefix=false, % specifies if the word chapter is printed for chapter headings
@@ -7,87 +8,28 @@
 			   % showframe, % show the page layout
 			   bibstyle=styleB,
 			   ]{fau-math-thesis}
-%
 % ########################################################################################
-% The following specifies the titlepage and can not be deleted
-% ----------------------------------------------------------------------------------------
-\title{Title of your thesis}
-\author{Your name}
-\thesistype{Bachelor-Arbeit}
-\degree{Bachelor of Science (B.Sc.)}
-\Referee{first=Prof. A, second=Dr. B} % Referees
-\Advisor{first=M.Sc. C}
-%\renewcommand{\supervisors}{Hello :)} % use this to specify the supervisor area yourself
-%\subdate{Today} % Use this if you want to specify the date on the titlepage
-% ########################################################################################
-\keywords{topicA, topicB, topicC} %keywords of your thesis
-\setpdfinfo % For additional information in the pdf file
-% ########################################################################################
-% bibliography
-\addbibresource{backmatter/thesis-bibliography.bib}
+\input{frontmatter/00_preamble.tex}
+\input{frontmatter/01_dedication_abstract.tex}
 %
-\newcommand{\hrefoot}[2]{\href{#1}{#2}\footnote{#1}}
-%
-\usepackage{styles/fau-colors}
-\colorthemefaumath
-%
-\usepackage[thmboxing=styleA,
-			boxingstyle=styleA,
-			chapterheader=styleA, 
-			footerheader=styleA]{styles/fau-appearence}
-\usepackage{styles/fau-symbols}
-
-\usepackage{kantlipsum}
-\usepackage{layouts}
-\usepackage{tabularx}
-\usepackage{graphicx}
-\usepackage{todonotes}
-\tcbuselibrary{listings}
-\lstset
-{	language={[LaTeX]TeX},
-    breaklines=true,
-    basicstyle=\ttfamily,
-    keywordstyle=\color{blue},
-    identifierstyle=\color{black},
-    texcsstyle=*\color{\colcomp},
-    commentstyle=\color{gray}
-}
-\newtcblisting[auto counter, 
-			   use counter from=theorem, 
-			   crefname={Listing}{Listings}]{lstbox}[2][]{
-			   styleA, 
-			   title=LISTING \thetcbcounter: #2,#1, 
-			   listing options={language={[LaTeX]TeX}}}
-
-\dedicationtext{
-	Für Andreas Goldberger,\\
-	ohne ihn hätte ich nie die Kraft gefunden heute Morgen aufzustehen.
-}
-\acknowledgementtext{
-	I would like to thank my supervisors for helping me finish this thesis.
-}
-
-
 \begin{document}
 %-------------------------------------------------
 \frontmatter
 %-------------------------------------------------
-\maketitle
-\printdedication
-\printacknowledgement
-\tableofcontents
-\listoffigures
-\printnomenclature
+%\maketitle
+%\printdedication
+%\printacknowledgement
+%\tableofcontents
+%\listoffigures
+%\printnomenclature
 %-------------------------------------------------
 \mainmatter
 %-------------------------------------------------
-\input{mainmatter/00_dedication_abstract.tex}
-\input{mainmatter/01_introduction.tex}
-\input{mainmatter/02_math.tex}
+% \input{mainmatter/01_introduction.tex}
+\input{mainmatter/02_example.tex}
 %-------------------------------------------------
 \backmatter
 \input{backmatter/thesis-printbib.tex}
-\printindex
+%\printindex
 %-------------------------------------------------
-
 \end{document}
