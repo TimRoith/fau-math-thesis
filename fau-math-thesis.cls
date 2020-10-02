@@ -263,7 +263,7 @@ von \textbf{\@author}
 \end{minipage}
 \hfill
 \begin{minipage}{0.3\textwidth}
-\includegraphics[width=\textwidth]{atelier/logo/DepMathLogo} \\[3mm]
+\includegraphics[width=\textwidth]{atelier/logo/DepMathLogo} \vspace{3mm}
 \end{minipage}
 }
 \end{titlepage}

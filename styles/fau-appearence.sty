@@ -145,7 +145,7 @@
 % ----------------------------------------------------------------------------------------	
 \tcbset{
 	thmstyle_plain/.style={fonttitle=\bfseries\upshape, 
-	fontupper=\slshape,
+	%fontupper=\slshape,
 	breakable,
 	before skip=15pt, % space before env
 	colback=white, boxrule=0pt, colframe=white, % no visible frame, no visible background
@@ -226,7 +226,9 @@
 \newtcbtheorem[use counter from=theorem]{definition}{DEFINITION}{\thmstyle, label type=definition}{def}
 \newtcbtheorem[use counter from=theorem]{corollary}{COROLLARY}{\thmstyle, label type=corollary}{cor}
 \newtcbtheorem[use counter from=theorem]{lemma}{LEMMA}{\thmstyle, label type=lemma}{lem}
-\newtcbtheorem[use counter from=theorem]{remark}{REMARK}{\thmstyle, label type=remark}{rem}
+\newtcbtheorem[use counter from=theorem]{remark}{REMARK}{thmstyle_plain, 
+														 after upper={\hfill$\triangle$},
+														 label type=remark}{rem}
 \newtcbtheorem[use counter from=theorem]{example}{EXAMPLE}{\thmstyle, 
 	fontupper=\upshape, label type=example}{ex}		
 }
