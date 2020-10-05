@@ -7,6 +7,7 @@
 %
 % ----------------------------------------------------------------------------------------
 % Theorem styles
+\newif\ifFAU@thmplain\FAU@thmplaintrue
 \def\thmstyle{thmstyle_plain}
 \def\thmsstyle{\tstyle@default}
 \DeclareOptionX{thmboxing}{
@@ -222,6 +223,7 @@
 \def\tstyle@default{}
 % ----------------------------------------------------------------------------------------	
 \def\tstyle@styleA{
+\FAU@thmplainfalse
 \newtcbtheorem[number within=chapter]{theorem}{THEOREM}{\thmstyle, label type=theorem}{thm}
 \newtcbtheorem[use counter from=theorem]{definition}{DEFINITION}{\thmstyle, label type=definition}{def}
 \newtcbtheorem[use counter from=theorem]{corollary}{COROLLARY}{\thmstyle, label type=corollary}{cor}
@@ -260,8 +262,13 @@
     % drop shadow southeast
 }
 % For important memos
-\renewtcolorbox[auto counter,use counter from=theorem]{memo}[2][]{
-	styleA, title= MEMO \thetcbcounter: ##2, ##1}
+\ifFAU@thmplain
+	\renewtcolorbox[auto counter]{memo}[2][]{
+		styleA, title= MEMO ##2, ##1}
+\else
+	\renewtcolorbox[auto counter,use counter from=theorem]{memo}[2][]{
+		styleA, title= MEMO \thetcbcounter: ##2, ##1}
+\fi
 }
 \boxingstyle % execute boxing
 % ########################################################################################
